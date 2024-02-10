@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QKeyEvent>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -16,7 +17,11 @@ public:
     ~MainWindow();
 
 private slots:
+    void digits_numbers();
 
+
+protected:
+    void keyPressEvent(QKeyEvent *pe) override;
 
 private:
     Ui::MainWindow *ui;

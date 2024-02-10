@@ -50,3 +50,5 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+build-s21_SmartCalc-Desktop_x86_darwin_generic_mach_o_64bit-Debug/
