@@ -34,5 +34,5 @@ clang:
 	clang-format -n -style=google $(SOURCES) *.h tests/*.c tests/*.h
 
 main: clean
-	$(GCC) $(CFALGS) $(SOURCES) $(CHECKFLAGS) -o s21_smart_calc
+	$(GCC) $(CFALGS) $(SOURCES) -o s21_smart_calc
 	./s21_smart_calc

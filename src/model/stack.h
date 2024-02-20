@@ -16,14 +16,14 @@ typedef enum Operators {
 	RESULT = 5,
 	SIGN = 6,
 	POW = 7,
-	SQRT = 8,
-	SIN = 9,
-	COS = 10,
-	TAN = 11,
-	ASIN = 12,
-	ACOS = 13,
-	ATAN = 14,
-	MOD = 15,
+	MOD = 8,
+	SQRT = 9,
+	SIN = 10,
+	COS = 11,
+	TAN = 12,
+	ASIN = 13,
+	ACOS = 14,
+	ATAN = 15,
 	LN = 16,
 	LG = 17,
 	LEFT_BRACKET = 18,
@@ -31,10 +31,10 @@ typedef enum Operators {
 } Operators;
 
 typedef struct Node{
-    numLexem value;
+  numLexem value;
 	operationLexem operator;
 	int priority;
-    struct Node *next;
+  struct Node *next;
 } Node;
 
 typedef struct{
@@ -56,5 +56,6 @@ void delete_list(Node *top);
 void stack_clear(Stack *s);
 void print_list(Node *top);
 void stack_print(const Stack *s);
+Stack get_inverse_stack(Stack *s);
 
 #endif 
