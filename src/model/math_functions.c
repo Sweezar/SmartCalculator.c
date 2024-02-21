@@ -25,13 +25,9 @@ int is_atan(const char* string) {
          string[3] == 'n';
 }
 
-int is_ln(const char* string) {
-  return string[0] == 'l' && string[1] == 'n';
-}
+int is_ln(const char* string) { return string[0] == 'l' && string[1] == 'n'; }
 
-int is_log(const char* string) {
-  return string[0] == 'l' && string[1] == 'g';
-}
+int is_log(const char* string) { return string[0] == 'l' && string[1] == 'g'; }
 
 int is_sqrt(const char* string) {
   return string[0] == 's' && string[1] == 'q' && string[2] == 'r' &&
@@ -43,5 +39,7 @@ int is_mod(const char* string) {
 }
 
 int is_math_function(const char* string) {
-  return is_sin(string) || is_cos(string) || is_tan(string) || is_asin(string) || is_acos(string) || is_atan(string) || is_ln(string) || is_log(string) || is_sqrt(string);
+  return is_sin(string) || is_cos(string) || is_tan(string) ||
+         is_asin(string) || is_acos(string) || is_atan(string) ||
+         is_ln(string) || is_log(string) || is_sqrt(string);
 }

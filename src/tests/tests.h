@@ -6,6 +6,8 @@
 
 #include "../model/s21_smart_calc.h"
 
+#define ACCURACY 1e-07
+
 Suite *test_brackets_calc(void);
 Suite *test_sum_calc(void);
 Suite *test_sub_calc(void);

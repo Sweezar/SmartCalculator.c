@@ -23,7 +23,7 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralwidget;
-    QLabel *label;
+    QLabel *result_show;
     QPushButton *number_button_4;
     QPushButton *number_button_7;
     QPushButton *number_button_1;
@@ -59,12 +59,13 @@ public:
     QRadioButton *radioButton_default;
     QRadioButton *radioButton_credit;
     QRadioButton *radioButton_deposit;
+    QPushButton *operation_button_result;
 
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(582, 406);
+        MainWindow->resize(510, 470);
         MainWindow->setStyleSheet(QString::fromUtf8("QPushButton {\n"
 "	border: 2px solid grey;\n"
 "	border-radius: 10px;\n"
@@ -78,14 +79,14 @@ public:
 "}"));
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
-        label = new QLabel(centralwidget);
-        label->setObjectName(QString::fromUtf8("label"));
-        label->setGeometry(QRect(14, 8, 561, 80));
-        label->setStyleSheet(QString::fromUtf8("font: 36pt \"PT Sans\";\n"
+        result_show = new QLabel(centralwidget);
+        result_show->setObjectName(QString::fromUtf8("result_show"));
+        result_show->setGeometry(QRect(14, 8, 481, 80));
+        result_show->setStyleSheet(QString::fromUtf8("font: 36pt \"PT Sans\";\n"
 "color: rgb(10, 10, 10);\n"
 "background-color: rgb(250, 250, 250);\n"
 "padding: 15px"));
-        label->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+        result_show->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
         number_button_4 = new QPushButton(centralwidget);
         number_button_4->setObjectName(QString::fromUtf8("number_button_4"));
         number_button_4->setGeometry(QRect(10, 220, 81, 61));
@@ -158,11 +159,11 @@ public:
         operation_button_sin->setStyleSheet(QString::fromUtf8(""));
         operation_button_lg = new QPushButton(centralwidget);
         operation_button_lg->setObjectName(QString::fromUtf8("operation_button_lg"));
-        operation_button_lg->setGeometry(QRect(490, 100, 81, 61));
+        operation_button_lg->setGeometry(QRect(410, 400, 81, 61));
         operation_button_lg->setStyleSheet(QString::fromUtf8(""));
         operation_button_ln = new QPushButton(centralwidget);
         operation_button_ln->setObjectName(QString::fromUtf8("operation_button_ln"));
-        operation_button_ln->setGeometry(QRect(410, 100, 81, 61));
+        operation_button_ln->setGeometry(QRect(330, 400, 81, 61));
         operation_button_ln->setStyleSheet(QString::fromUtf8(""));
         operation_button_cos = new QPushButton(centralwidget);
         operation_button_cos->setObjectName(QString::fromUtf8("operation_button_cos"));
@@ -190,7 +191,7 @@ public:
         operation_button_sqrt->setStyleSheet(QString::fromUtf8(""));
         operation_button_pow = new QPushButton(centralwidget);
         operation_button_pow->setObjectName(QString::fromUtf8("operation_button_pow"));
-        operation_button_pow->setGeometry(QRect(490, 160, 81, 61));
+        operation_button_pow->setGeometry(QRect(410, 100, 81, 61));
         operation_button_pow->setStyleSheet(QString::fromUtf8(""));
         operation_button_mod = new QPushButton(centralwidget);
         operation_button_mod->setObjectName(QString::fromUtf8("operation_button_mod"));
@@ -206,19 +207,23 @@ public:
         operation_button_acos->setStyleSheet(QString::fromUtf8(""));
         radioButton_default = new QRadioButton(centralwidget);
         radioButton_default->setObjectName(QString::fromUtf8("radioButton_default"));
-        radioButton_default->setGeometry(QRect(490, 220, 81, 61));
+        radioButton_default->setGeometry(QRect(10, 400, 81, 61));
         radioButton_default->setStyleSheet(QString::fromUtf8("padding-left: 5px;\n"
 "font-size: 16px;"));
         radioButton_credit = new QRadioButton(centralwidget);
         radioButton_credit->setObjectName(QString::fromUtf8("radioButton_credit"));
-        radioButton_credit->setGeometry(QRect(490, 280, 81, 61));
+        radioButton_credit->setGeometry(QRect(90, 400, 81, 61));
         radioButton_credit->setStyleSheet(QString::fromUtf8("padding-left: 5px;\n"
 "font-size: 16px;"));
         radioButton_deposit = new QRadioButton(centralwidget);
         radioButton_deposit->setObjectName(QString::fromUtf8("radioButton_deposit"));
-        radioButton_deposit->setGeometry(QRect(490, 340, 81, 61));
+        radioButton_deposit->setGeometry(QRect(170, 400, 81, 61));
         radioButton_deposit->setStyleSheet(QString::fromUtf8("padding-left: 5px;\n"
 "font-size: 16px;"));
+        operation_button_result = new QPushButton(centralwidget);
+        operation_button_result->setObjectName(QString::fromUtf8("operation_button_result"));
+        operation_button_result->setGeometry(QRect(250, 400, 81, 61));
+        operation_button_result->setStyleSheet(QString::fromUtf8(""));
         MainWindow->setCentralWidget(centralwidget);
 
         retranslateUi(MainWindow);
@@ -229,7 +234,7 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
-        label->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
+        result_show->setText(QString());
         number_button_4->setText(QCoreApplication::translate("MainWindow", "4", nullptr));
         number_button_7->setText(QCoreApplication::translate("MainWindow", "7", nullptr));
         number_button_1->setText(QCoreApplication::translate("MainWindow", "1", nullptr));
@@ -265,6 +270,7 @@ public:
         radioButton_default->setText(QCoreApplication::translate("MainWindow", "default", nullptr));
         radioButton_credit->setText(QCoreApplication::translate("MainWindow", "credit", nullptr));
         radioButton_deposit->setText(QCoreApplication::translate("MainWindow", "deposit", nullptr));
+        operation_button_result->setText(QCoreApplication::translate("MainWindow", "=", nullptr));
     } // retranslateUi
 
 };
