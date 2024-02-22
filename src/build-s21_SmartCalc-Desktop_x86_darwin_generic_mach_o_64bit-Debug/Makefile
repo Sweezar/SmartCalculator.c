@@ -52,10 +52,16 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = ../s21_SmartCalc/main.cpp \
+SOURCES       = ../s21_SmartCalc/model/math_functions.c \
+		../s21_SmartCalc/model/s21_smart_calc.c \
+		../s21_SmartCalc/model/stack.c \
+		../s21_SmartCalc/main.cpp \
 		../s21_SmartCalc/mainwindow.cpp qrc_qmake_qmake_qm_files.cpp \
 		moc_mainwindow.cpp
-OBJECTS       = main.o \
+OBJECTS       = math_functions.o \
+		s21_smart_calc.o \
+		stack.o \
+		main.o \
 		mainwindow.o \
 		qrc_qmake_qmake_qm_files.o \
 		moc_mainwindow.o
@@ -285,6 +291,7 @@ DIST          = /usr/local/share/qt/mkspecs/features/spec_pre.prf \
 		/usr/local/share/qt/mkspecs/features/qt_config.prf \
 		/usr/local/share/qt/mkspecs/macx-clang/qmake.conf \
 		/usr/local/share/qt/mkspecs/features/spec_post.prf \
+		../s21_SmartCalc/.qmake.stash \
 		/usr/local/share/qt/mkspecs/features/exclusive_builds.prf \
 		/usr/local/share/qt/mkspecs/features/mac/sdk.prf \
 		/usr/local/share/qt/mkspecs/features/toolchain.prf \
@@ -314,7 +321,13 @@ DIST          = /usr/local/share/qt/mkspecs/features/spec_pre.prf \
 		/usr/local/share/qt/mkspecs/features/exceptions.prf \
 		/usr/local/share/qt/mkspecs/features/yacc.prf \
 		/usr/local/share/qt/mkspecs/features/lex.prf \
-		../s21_SmartCalc/s21_SmartCalc.pro ../s21_SmartCalc/mainwindow.h ../s21_SmartCalc/main.cpp \
+		../s21_SmartCalc/s21_SmartCalc.pro ../s21_SmartCalc/model/math_functions.h \
+		../s21_SmartCalc/model/s21_smart_calc.h \
+		../s21_SmartCalc/model/stack.h \
+		../s21_SmartCalc/mainwindow.h ../s21_SmartCalc/model/math_functions.c \
+		../s21_SmartCalc/model/s21_smart_calc.c \
+		../s21_SmartCalc/model/stack.c \
+		../s21_SmartCalc/main.cpp \
 		../s21_SmartCalc/mainwindow.cpp
 QMAKE_TARGET  = s21_SmartCalc
 DESTDIR       = 
@@ -324,7 +337,7 @@ TARGET        = s21_SmartCalc.app/Contents/MacOS/s21_SmartCalc
 EXPORT_QMAKE_MAC_SDK = macosx
 EXPORT_QMAKE_MAC_SDK_VERSION = 12.1
 EXPORT_QMAKE_XCODE_DEVELOPER_PATH = /Applications/Xcode.app/Contents/Developer
-EXPORT__QMAKE_STASH_ = 
+EXPORT__QMAKE_STASH_ = /Users/berneick/Desktop/C7_SmartCalc_v1.0-1/src/build-s21_SmartCalc-Desktop_x86_darwin_generic_mach_o_64bit-Debug/.qmake.stash
 EXPORT_VALID_ARCHS = x86_64
 EXPORT_DEFAULT_ARCHS = x86_64
 EXPORT_ARCHS = $(filter $(EXPORT_VALID_ARCHS), $(if $(ARCHS), $(ARCHS), $(if $(EXPORT_DEFAULT_ARCHS), $(EXPORT_DEFAULT_ARCHS), $(EXPORT_VALID_ARCHS))))
@@ -566,6 +579,7 @@ Makefile: ../s21_SmartCalc/s21_SmartCalc.pro /usr/local/share/qt/mkspecs/macx-cl
 		/usr/local/share/qt/mkspecs/features/qt_config.prf \
 		/usr/local/share/qt/mkspecs/macx-clang/qmake.conf \
 		/usr/local/share/qt/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/usr/local/share/qt/mkspecs/features/exclusive_builds.prf \
 		/usr/local/share/qt/mkspecs/features/mac/sdk.prf \
 		/usr/local/share/qt/mkspecs/features/toolchain.prf \
@@ -827,6 +841,7 @@ Makefile: ../s21_SmartCalc/s21_SmartCalc.pro /usr/local/share/qt/mkspecs/macx-cl
 /usr/local/share/qt/mkspecs/features/qt_config.prf:
 /usr/local/share/qt/mkspecs/macx-clang/qmake.conf:
 /usr/local/share/qt/mkspecs/features/spec_post.prf:
+.qmake.stash:
 /usr/local/share/qt/mkspecs/features/exclusive_builds.prf:
 /usr/local/share/qt/mkspecs/features/mac/sdk.prf:
 /usr/local/share/qt/mkspecs/features/toolchain.prf:
@@ -893,8 +908,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents ../s21_SmartCalc/s21_SmartCalc_ru_RU.ts $(DISTDIR)/
 	$(COPY_FILE) --parents qmake_qmake_qm_files.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/local/share/qt/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../s21_SmartCalc/mainwindow.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../s21_SmartCalc/main.cpp ../s21_SmartCalc/mainwindow.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../s21_SmartCalc/model/math_functions.h ../s21_SmartCalc/model/s21_smart_calc.h ../s21_SmartCalc/model/stack.h ../s21_SmartCalc/mainwindow.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../s21_SmartCalc/model/math_functions.c ../s21_SmartCalc/model/s21_smart_calc.c ../s21_SmartCalc/model/stack.c ../s21_SmartCalc/main.cpp ../s21_SmartCalc/mainwindow.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../s21_SmartCalc/mainwindow.ui $(DISTDIR)/
 	$(COPY_FILE) --parents ../s21_SmartCalc/s21_SmartCalc_ru_RU.ts $(DISTDIR)/
 
@@ -906,6 +921,7 @@ clean: compiler_clean
 
 distclean: clean 
 	-$(DEL_FILE) -r s21_SmartCalc.app
+	-$(DEL_FILE) .qmake.stash
 	-$(DEL_FILE) Makefile
 
 
@@ -948,6 +964,8 @@ compiler_moc_header_clean:
 moc_mainwindow.cpp: ../s21_SmartCalc/mainwindow.h \
 		/usr/local/lib/QtWidgets.framework/Headers/QMainWindow \
 		/usr/local/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		/usr/local/lib/QtGui.framework/Headers/QKeyEvent \
+		/usr/local/lib/QtGui.framework/Headers/qevent.h \
 		moc_predefs.h \
 		/usr/local/share/qt/libexec/moc
 	/usr/local/share/qt/libexec/moc $(DEFINES) --include /Users/berneick/Desktop/C7_SmartCalc_v1.0-1/src/build-s21_SmartCalc-Desktop_x86_darwin_generic_mach_o_64bit-Debug/moc_predefs.h -I/usr/local/share/qt/mkspecs/macx-clang -I/Users/berneick/Desktop/C7_SmartCalc_v1.0-1/src/s21_SmartCalc -I/usr/local/lib/QtWidgets.framework/Headers -I/usr/local/lib/QtGui.framework/Headers -I/usr/local/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/13.0.0/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/usr/local/lib ../s21_SmartCalc/mainwindow.h -o moc_mainwindow.cpp
@@ -975,9 +993,22 @@ compiler_clean: compiler_lrelease_clean compiler_rcc_clean compiler_moc_predefs_
 
 ####### Compile
 
+math_functions.o: ../s21_SmartCalc/model/math_functions.c 
+	$(CC) -c $(CFLAGS) $(INCPATH) -o math_functions.o ../s21_SmartCalc/model/math_functions.c
+
+s21_smart_calc.o: ../s21_SmartCalc/model/s21_smart_calc.c ../s21_SmartCalc/model/s21_smart_calc.h \
+		../s21_SmartCalc/model/math_functions.h \
+		../s21_SmartCalc/model/stack.h
+	$(CC) -c $(CFLAGS) $(INCPATH) -o s21_smart_calc.o ../s21_SmartCalc/model/s21_smart_calc.c
+
+stack.o: ../s21_SmartCalc/model/stack.c ../s21_SmartCalc/model/stack.h
+	$(CC) -c $(CFLAGS) $(INCPATH) -o stack.o ../s21_SmartCalc/model/stack.c
+
 main.o: ../s21_SmartCalc/main.cpp ../s21_SmartCalc/mainwindow.h \
 		/usr/local/lib/QtWidgets.framework/Headers/QMainWindow \
 		/usr/local/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		/usr/local/lib/QtGui.framework/Headers/QKeyEvent \
+		/usr/local/lib/QtGui.framework/Headers/qevent.h \
 		/usr/local/lib/QtWidgets.framework/Headers/QApplication \
 		/usr/local/lib/QtWidgets.framework/Headers/qapplication.h \
 		/usr/local/lib/QtCore.framework/Headers/QLocale \
@@ -989,7 +1020,12 @@ main.o: ../s21_SmartCalc/main.cpp ../s21_SmartCalc/mainwindow.h \
 mainwindow.o: ../s21_SmartCalc/mainwindow.cpp ../s21_SmartCalc/mainwindow.h \
 		/usr/local/lib/QtWidgets.framework/Headers/QMainWindow \
 		/usr/local/lib/QtWidgets.framework/Headers/qmainwindow.h \
-		ui_mainwindow.h
+		/usr/local/lib/QtGui.framework/Headers/QKeyEvent \
+		/usr/local/lib/QtGui.framework/Headers/qevent.h \
+		ui_mainwindow.h \
+		../s21_SmartCalc/model/s21_smart_calc.h \
+		../s21_SmartCalc/model/math_functions.h \
+		../s21_SmartCalc/model/stack.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../s21_SmartCalc/mainwindow.cpp
 
 qrc_qmake_qmake_qm_files.o: qrc_qmake_qmake_qm_files.cpp 

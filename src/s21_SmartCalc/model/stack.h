@@ -32,7 +32,7 @@ typedef enum Operators {
 
 typedef struct Node {
   numLexem value;
-  operationLexem operator;
+  operationLexem math_operator;
   int priority;
   struct Node *next;
 } Node;
@@ -48,7 +48,7 @@ int stack_top_is_num(const Stack *s);
 numLexem stack_top_num(const Stack *s);
 int stack_top_is_operator(const Stack *s);
 operationLexem stack_top_operator(const Stack *s);
-void stack_push(Stack *s, numLexem value, operationLexem operator,
+void stack_push(Stack *s, numLexem value, operationLexem math_operator,
                 int priority);
 numLexem stack_pop_number(Stack *s);
 operationLexem stack_pop_operator(Stack *s);

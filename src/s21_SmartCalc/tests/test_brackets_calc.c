@@ -2,20 +2,20 @@
 
 START_TEST(test_brackets_calc_1) {
   double res = 0;
-  double reference = (1+2)* pow(pow(3,2),2)-6/(7+8/9.0);
+  double reference = (1 + 2) * pow(pow(3, 2), 2) - 6 / (7 + 8 / 9.0);
   char *expression = "(1+2)*3^2^2-6/(7+8/9)";
   res = evaluate_expression(expression);
-  
+
   ck_assert_double_eq_tol(reference, res, ACCURACY);
 }
 END_TEST
 
 START_TEST(test_brackets_calc_2) {
   double res = 0;
-  double reference = (1+(2-3*(5-3)+4));
+  double reference = (1 + (2 - 3 * (5 - 3) + 4));
   char *expression = "(1+(2-3*(5-3)+4))";
   res = evaluate_expression(expression);
-  
+
   ck_assert_double_eq_tol(reference, res, ACCURACY);
 }
 END_TEST

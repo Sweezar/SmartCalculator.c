@@ -7,20 +7,20 @@ void stack_create(Stack *s) {
 
 size_t stack_size(const Stack *s) { return s->size; }
 
-int stack_top_is_num(const Stack *s) { return (s->top->operator== 0); }
+int stack_top_is_num(const Stack *s) { return (s->top->math_operator== 0); }
 
 numLexem stack_top_num(const Stack *s) { return s->top->value; }
 
-int stack_top_is_operator(const Stack *s) { return (s->top->operator!= 0); }
+int stack_top_is_operator(const Stack *s) { return (s->top->math_operator!= 0); }
 
-operationLexem stack_top_operator(const Stack *s) { return s->top->operator; }
+operationLexem stack_top_operator(const Stack *s) { return s->top->math_operator; }
 
-void stack_push(Stack *s, numLexem value, operationLexem operator,
+void stack_push(Stack *s, numLexem value, operationLexem math_operator,
                 int priority) {
   Node *ptr = (Node *)malloc(sizeof(Node));
   if (ptr != NULL) {
     ptr->value = value;
-    ptr->operator= operator;
+    ptr->math_operator= math_operator;
     ptr->priority = priority;
     ptr->next = s->top;
     s->top = ptr;
@@ -45,7 +45,7 @@ numLexem stack_pop_number(Stack *s) {
 
 operationLexem stack_pop_operator(Stack *s) {
   Node *tmp = s->top;
-  operationLexem tmp_value = tmp->operator;
+  operationLexem tmp_value = tmp->math_operator;
   s->top = s->top->next;
   s->size--;
   free(tmp);
@@ -72,8 +72,8 @@ void stack_clear(Stack *s) {
 void print_list(Node *top) {
   Node *ptr = top;
   while (ptr != NULL) {
-    if (ptr->operator) {
-      printf("%d - operator, \t", ptr->operator);
+    if (ptr->math_operator) {
+      printf("%d - operator, \t", ptr->math_operator);
     } else {
       printf("%lf - number, \t", ptr->value);
     }

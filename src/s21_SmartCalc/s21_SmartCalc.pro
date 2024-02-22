@@ -9,10 +9,16 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    model/math_functions.c \
+    model/s21_smart_calc.c \
+    model/stack.c \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
+    model/math_functions.h \
+    model/s21_smart_calc.h \
+    model/stack.h \
     mainwindow.h
 
 FORMS += \

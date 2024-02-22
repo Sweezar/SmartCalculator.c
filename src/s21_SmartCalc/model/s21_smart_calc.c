@@ -5,35 +5,39 @@ Node get_node_operators(char* expression) {
   res.value = 0;
   switch (*expression) {
     case '+':
-      res.operator= SUM;
+      res.math_operator= SUM;
       res.priority = 1;
       break;
     case '-':
-      res.operator= SUB;
+      res.math_operator= SUB;
       res.priority = 1;
       break;
     case '*':
-      res.operator= MULT;
+      res.math_operator= MULT;
       res.priority = 2;
       break;
     case '/':
-      res.operator= DIVISION;
+      res.math_operator= DIVISION;
       res.priority = 2;
       break;
     case '^':
-      res.operator= POW;
+      res.math_operator= POW;
       res.priority = 3;
       break;
     case '(':
-      res.operator= LEFT_BRACKET;
+      res.math_operator= LEFT_BRACKET;
       res.priority = 0;
       break;
     case ')':
-      res.operator= RIGHT_BRACKET;
+      res.math_operator= RIGHT_BRACKET;
       res.priority = 6;
       break;
     default:
       break;
+  }
+  if(is_mod(expression)) {
+    res.math_operator = MOD;
+    res.priority = 2;
   }
   return res;
 }
@@ -52,72 +56,14 @@ char* identify_operator_in_expression(char* expression, Stack* operators,
                                       int* is_negative_number,
                                       int* in_brackets_flag,
                                       int* numbers_in_brackets) {
-  Node current_operation_node;
-  double tmp_result = 0;
 
   if (*is_operator_last && *expression == '-') {  // если унарный минус
     *is_negative_number = 1;
     expression += 1;
-  } else if (is_math_function(expression) ||
-             is_mod(expression)) {  // если математическая функция
+  } else if (is_math_function(expression)) {  // если математическая функция
     expression = evaluate_math_functions(expression, operators);
-  } else {
-    current_operation_node =
-        get_node_operators(expression);  // текущая нода операции
-    // левую скобку сразу закидываем в стек
-    if (current_operation_node.operator== LEFT_BRACKET) {
-      stack_push(operators, current_operation_node.value,
-                 current_operation_node.operator,
-                 current_operation_node.priority);
-      *in_brackets_flag += 1;
-      *is_operator_last = 1;
-    } else if (stack_is_empty(operators)) {  // либо если стек пуст
-      stack_push(operators, current_operation_node.value,
-                 current_operation_node.operator,
-                 current_operation_node.priority);
-      *is_operator_last = 1;
-      //если правая скобка, то считаем все выражение
-    } else if (current_operation_node.operator== RIGHT_BRACKET) {
-      if (*numbers_in_brackets > 1) {
-        while (operators->top->operator!= LEFT_BRACKET) {
-          calculate_last_operation(numbers, operators);
-          *numbers_in_brackets -= 1;
-        }
-      }
-      if (stack_top_operator(operators) == LEFT_BRACKET) {
-        stack_pop_operator(operators);  // сброс левой скобки из стека
-        *in_brackets_flag -= 1;
-      }
-      //если перед открывающей скобкой стояла математическая функция, то считаем
-      if (!stack_is_empty(operators) && stack_top_operator(operators) >= SQRT &&
-          stack_top_operator(operators) <= LG) {
-        tmp_result = calculate_math_function(stack_pop_number(numbers),
-                                             stack_pop_operator(operators));
-        stack_push(numbers, tmp_result, NUMBER, 0);
-      }
-      if (!in_brackets_flag) {
-        *numbers_in_brackets = 0;
-      }
-      // если текущий оператор менее приоритетный чем верхний в стеке, то
-      // считаем предыдущее
-    } else if (current_operation_node.priority <= operators->top->priority) {
-      // считаем, пока в стеке есть операторы или пока не встретим оператор
-      // более высокого приоритета
-      while (!stack_is_empty(operators) &&
-             current_operation_node.priority <= operators->top->priority) {
-        calculate_last_operation(numbers, operators);
-      }
-      stack_push(operators, current_operation_node.value,
-                 current_operation_node.operator,
-                 current_operation_node.priority);
-      *is_operator_last = 1;
-    } else {  // иначе просто закидываем оператор в стек
-      stack_push(operators, current_operation_node.value,
-                 current_operation_node.operator,
-                 current_operation_node.priority);
-      *is_operator_last = 1;
-    }
-    expression += 1;
+  } else { // если простые операторы
+    expression = evaluate_operators(expression, numbers, operators, in_brackets_flag, is_operator_last, numbers_in_brackets);
   }
   return expression;
 }
@@ -195,17 +141,63 @@ char* evaluate_math_functions(char* expression, Stack* operators) {
   } else if (is_sqrt(expression)) {
     stack_push(operators, 0, SQRT, 5);
     expression += 4;
-  } else if (is_mod(expression)) {
-    stack_push(operators, 0, MOD, 2);
-    expression += 3;
   }
 
   return expression;
 }
 
-double calculate_operation(double a, double b, int operator) {
+char* evaluate_operators(char* expression, Stack* numbers, Stack* operators, int* in_brackets_flag, int* is_operator_last, int* numbers_in_brackets) {
+  Node cur_node;
+  double tmp_result = 0;
+  cur_node = get_node_operators(expression);  // текущая нода операции
+  // левую скобку сразу закидываем в стек
+  if (cur_node.math_operator== LEFT_BRACKET) {
+    stack_push(operators, cur_node.value, cur_node.math_operator, cur_node.priority);
+    *in_brackets_flag += 1;
+    *is_operator_last = 1;
+  } else if (stack_is_empty(operators)) {  // либо если стек пуст
+    stack_push(operators, cur_node.value, cur_node.math_operator, cur_node.priority);
+    *is_operator_last = 1;
+  } else if (cur_node.math_operator == RIGHT_BRACKET) {
+    if (*numbers_in_brackets > 1) {
+      while (operators->top->math_operator != LEFT_BRACKET) {
+        calculate_last_operation(numbers, operators);
+        *numbers_in_brackets -= 1;
+      }
+    }
+    if (stack_top_operator(operators) == LEFT_BRACKET) {
+      stack_pop_operator(operators);  // сброс левой скобки из стека
+      *in_brackets_flag -= 1;
+    }
+    if (!stack_is_empty(operators) && stack_top_operator(operators) >= SQRT && stack_top_operator(operators) <= LG) {
+      tmp_result = calculate_math_function(stack_pop_number(numbers), stack_pop_operator(operators));
+      stack_push(numbers, tmp_result, NUMBER, 0);
+    }
+    if (!in_brackets_flag) {
+      *numbers_in_brackets = 0;
+    }
+  } else if (cur_node.priority <= operators->top->priority) {
+    while (!stack_is_empty(operators) && cur_node.priority <= operators->top->priority) {
+      calculate_last_operation(numbers, operators);
+    }
+    stack_push(operators, cur_node.value, cur_node.math_operator, cur_node.priority);
+    *is_operator_last = 1;
+  } else {  // иначе просто закидываем оператор в стек
+    stack_push(operators, cur_node.value, cur_node.math_operator, cur_node.priority);
+    *is_operator_last = 1;
+  }
+  if(is_mod(expression)) {
+    expression += 3;
+  } else {
+    expression += 1;
+  }
+
+  return expression;
+}
+
+double calculate_operation(double a, double b, int math_operator) {
   double result = 0;
-  switch (operator) {
+  switch (math_operator) {
     case SUM:
       result = a + b;
       break;
@@ -224,17 +216,14 @@ double calculate_operation(double a, double b, int operator) {
     case MOD:
       result = (int)a % (int)b;
       break;
-
-    default:
-      break;
   }
 
   return result;
 };
 
-double calculate_math_function(double a, int operator) {
+double calculate_math_function(double a, int math_operator) {
   double result = 0;
-  switch (operator) {
+  switch (math_operator) {
     case SQRT:
       result = sqrt(a);
       break;
@@ -261,8 +250,6 @@ double calculate_math_function(double a, int operator) {
       break;
     case LG:
       result = log10(a);
-      break;
-    default:
       break;
   }
   return result;

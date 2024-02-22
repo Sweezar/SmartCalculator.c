@@ -14,8 +14,9 @@ char *identify_number_in_expression(char *expression, Stack *numbers);
 
 double evaluate_expression(char *expression);
 char *evaluate_math_functions(char *expression, Stack *operators);
-double calculate_operation(double a, double b, int operator);
-double calculate_math_function(double a, int operator);
+char* evaluate_operators(char* expression, Stack* numbers, Stack* operators, int* in_brackets_flag, int* is_operator_last, int* numbers_in_brackets);
+double calculate_operation(double a, double b, int math_operator);
+double calculate_math_function(double a, int math_operator);
 void calculate_last_operation(Stack *numbers, Stack *operators);
 
 #endif

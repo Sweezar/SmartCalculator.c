@@ -18,7 +18,9 @@ public:
 
 private slots:
     void digits_numbers();
-
+    void calculate();
+    void clean_window();
+    void remove_symbol();
 
 protected:
     void keyPressEvent(QKeyEvent *pe) override;
