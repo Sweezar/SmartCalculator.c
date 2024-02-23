@@ -238,7 +238,7 @@ public:
         number_button_4->setText(QCoreApplication::translate("MainWindow", "4", nullptr));
         number_button_7->setText(QCoreApplication::translate("MainWindow", "7", nullptr));
         number_button_1->setText(QCoreApplication::translate("MainWindow", "1", nullptr));
-        operation_button_sign->setText(QCoreApplication::translate("MainWindow", "+/-", nullptr));
+        operation_button_sign->setText(QString());
         operation_button_clear->setText(QCoreApplication::translate("MainWindow", "C", nullptr));
         operation_button_remove->setText(QCoreApplication::translate("MainWindow", "<-x", nullptr));
         number_button_8->setText(QCoreApplication::translate("MainWindow", "8", nullptr));
@@ -253,7 +253,7 @@ public:
         operation_button_mult->setText(QCoreApplication::translate("MainWindow", "*", nullptr));
         operation_button_sum->setText(QCoreApplication::translate("MainWindow", "+", nullptr));
         operation_button_sub->setText(QCoreApplication::translate("MainWindow", "-", nullptr));
-        operation_button_div->setText(QCoreApplication::translate("MainWindow", "\303\267", nullptr));
+        operation_button_div->setText(QCoreApplication::translate("MainWindow", "/", nullptr));
         operation_button_sin->setText(QCoreApplication::translate("MainWindow", "sin", nullptr));
         operation_button_lg->setText(QCoreApplication::translate("MainWindow", "lg", nullptr));
         operation_button_ln->setText(QCoreApplication::translate("MainWindow", "ln", nullptr));

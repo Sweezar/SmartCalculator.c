@@ -17,10 +17,11 @@ public:
     ~MainWindow();
 
 private slots:
-    void digits_numbers();
+    void add_button_text();
     void calculate();
     void clean_window();
     void remove_symbol();
+    void add_math_function();
 
 protected:
     void keyPressEvent(QKeyEvent *pe) override;

@@ -4,7 +4,7 @@ START_TEST(test_mod_calc_1) {
   double res = 0;
   double reference = 1 % 2;
   char *expression = "1mod2";
-  res = evaluate_expression(expression);
+  evaluate_expression(expression, &res);
 
   ck_assert_double_eq_tol(reference, res, ACCURACY);
 }
@@ -14,7 +14,7 @@ START_TEST(test_mod_calc_2) {
   double res = 0;
   double reference = 1 % 3 - 7 * 9 % (-10) - 1038;
   char *expression = "1mod3-7*9mod(-10)-1038";
-  res = evaluate_expression(expression);
+  evaluate_expression(expression, &res);
 
   ck_assert_double_eq_tol(reference, res, ACCURACY);
 }
@@ -24,7 +24,7 @@ START_TEST(test_mod_calc_3) {
   double res = 0;
   double reference = (1+3)%(7+9)%(10+1038);
   char *expression = "(1+3)mod(7+9)mod(10+1038)";
-  res = evaluate_expression(expression);
+  evaluate_expression(expression, &res);
 
   ck_assert_double_eq_tol(reference, res, ACCURACY);
 }
@@ -34,7 +34,7 @@ START_TEST(test_mod_calc_4) {
   double res = 0;
   double reference = ((1%3)-(-7%-9))+10-1038;
   char *expression = "((1mod3)-(-7mod-9))+10-1038";
-  res = evaluate_expression(expression);
+  evaluate_expression(expression, &res);
 
   ck_assert_double_eq_tol(reference, res, ACCURACY);
 }

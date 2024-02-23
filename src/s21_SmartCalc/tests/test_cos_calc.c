@@ -4,7 +4,7 @@ START_TEST(test_cos_calc_1) {
   double res = 0;
   double reference = cos(48.5);
   char *expression = "cos(48.5)";
-  res = evaluate_expression(expression);
+  evaluate_expression(expression, &res);
 
   ck_assert_double_eq_tol(reference, res, ACCURACY);
 }
@@ -14,7 +14,7 @@ START_TEST(test_cos_calc_2) {
   double res = 0;
   double reference = 10 - cos(48.5);
   char *expression = "10-cos(48.5)";
-  res = evaluate_expression(expression);
+  evaluate_expression(expression, &res);
 
   ck_assert_double_eq_tol(reference, res, ACCURACY);
 }
@@ -24,7 +24,7 @@ START_TEST(test_cos_calc_3) {
   double res = 0;
   double reference = 10 - cos(48.5+35);
   char *expression = "10-cos(48.5+35)";
-  res = evaluate_expression(expression);
+  evaluate_expression(expression, &res);
 
   ck_assert_double_eq_tol(reference, res, ACCURACY);
 }
@@ -34,7 +34,7 @@ START_TEST(test_cos_calc_4) {
   double res = 0;
   double reference = 10 - cos(48.5*35)/2;
   char *expression = "10-cos(48.5*35)/2";
-  res = evaluate_expression(expression);
+  evaluate_expression(expression, &res);
 
   ck_assert_double_eq_tol(reference, res, ACCURACY);
 }

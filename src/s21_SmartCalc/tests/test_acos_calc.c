@@ -4,7 +4,7 @@ START_TEST(test_acos_calc_1) {
   double res = 0;
   double reference = acos(0.5);
   char *expression = "acos(0.5)";
-  res = evaluate_expression(expression);
+  evaluate_expression(expression, &res);
 
   ck_assert_double_eq_tol(reference, res, ACCURACY);
 }
@@ -14,7 +14,7 @@ START_TEST(test_acos_calc_2) {
   double res = 0;
   double reference = 10 - acos(0.5);
   char *expression = "10-acos(0.5)";
-  res = evaluate_expression(expression);
+  evaluate_expression(expression, &res);
 
   ck_assert_double_eq_tol(reference, res, ACCURACY);
 }
@@ -24,7 +24,7 @@ START_TEST(test_acos_calc_3) {
   double res = 0;
   double reference = 10 - acos(48.5-48.35);
   char *expression = "10-acos(48.5-48.35)";
-  res = evaluate_expression(expression);
+  evaluate_expression(expression, &res);
 
   ck_assert_double_eq_tol(reference, res, ACCURACY);
 }
@@ -34,7 +34,7 @@ START_TEST(test_acos_calc_4) {
   double res = 0;
   double reference = 10 - acos(48.5*0.0035)/2;
   char *expression = "10-acos(48.5*0.0035)/2";
-  res = evaluate_expression(expression);
+  evaluate_expression(expression, &res);
 
   ck_assert_double_eq_tol(reference, res, ACCURACY);
 }

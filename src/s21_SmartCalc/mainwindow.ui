@@ -101,7 +101,7 @@ padding: 15px</string>
      <string notr="true"/>
     </property>
     <property name="text">
-     <string>+/-</string>
+     <string/>
     </property>
    </widget>
    <widget class="QPushButton" name="operation_button_clear">
@@ -320,7 +320,7 @@ padding: 15px</string>
      <string notr="true"/>
     </property>
     <property name="text">
-     <string>÷</string>
+     <string>/</string>
     </property>
    </widget>
    <widget class="QPushButton" name="operation_button_sin">

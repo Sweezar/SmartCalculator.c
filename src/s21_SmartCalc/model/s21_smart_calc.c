@@ -1,5 +1,51 @@
 #include "s21_smart_calc.h"
 
+int evaluate_expression(char* expression, double* result) {
+  char* expression_ptr = expression;
+  s_options options;
+  options.is_operator_last = 1;
+  options.is_negative_number = 0;
+  options.numbers_in_brackets = 0;
+  options.in_brackets_flag = 0;
+  options.error_code = 0;
+
+  Stack numbers;
+  Stack operators;
+  stack_create(&numbers);
+  stack_create(&operators);
+
+  while (*expression_ptr) {
+    if (isdigit(*expression_ptr)) {
+      expression_ptr = identify_number_in_expression(expression_ptr, &numbers);
+      if (options.is_negative_number) {
+        options.is_negative_number = 0;
+        numbers.top->value *= -1;
+      }
+      options.is_operator_last = 0;
+      if (options.in_brackets_flag) {
+        options.numbers_in_brackets++;
+      }
+    } else {
+      expression_ptr = identify_operator_in_expression(
+          expression_ptr, &operators, &numbers, &options);
+    }
+  }
+
+  while(!stack_is_empty(&operators) && 0 == options.error_code) {
+    options.error_code = calculate_last_operation(&numbers, &operators);
+  }
+  if(0 == options.error_code) {
+    *result = stack_pop_number(&numbers);
+  }
+  if(!stack_is_empty(&numbers) || !stack_is_empty(&operators)) {
+    options.error_code = 1;
+  }
+  stack_clear(&numbers);
+  stack_clear(&operators);
+
+  return options.error_code;
+}
+
 Node get_node_operators(char* expression) {
   Node res;
   res.value = 0;
@@ -51,66 +97,17 @@ char* identify_number_in_expression(char* expression, Stack* numbers) {
   return expression;
 }
 
-char* identify_operator_in_expression(char* expression, Stack* operators,
-                                      Stack* numbers, int* is_operator_last,
-                                      int* is_negative_number,
-                                      int* in_brackets_flag,
-                                      int* numbers_in_brackets) {
+char* identify_operator_in_expression(char* expression, Stack* operators, Stack* numbers, s_options* options) {
 
-  if (*is_operator_last && *expression == '-') {  // если унарный минус
-    *is_negative_number = 1;
+  if (options->is_operator_last && *expression == '-') {  // если унарный минус
+    options->is_negative_number = 1;
     expression += 1;
   } else if (is_math_function(expression)) {  // если математическая функция
     expression = evaluate_math_functions(expression, operators);
   } else { // если простые операторы
-    expression = evaluate_operators(expression, numbers, operators, in_brackets_flag, is_operator_last, numbers_in_brackets);
+    expression = evaluate_operators(expression, numbers, operators, options);
   }
   return expression;
-}
-
-double evaluate_expression(char* expression) {
-  char* expression_ptr = expression;
-  int is_operator_last = 1;
-  int is_negative_number = 0;
-  int numbers_in_brackets = 0;
-  int in_brackets_flag = 0;
-  double result;
-
-  Stack numbers;
-  Stack operators;
-  stack_create(&numbers);
-  stack_create(&operators);
-
-  while (*expression_ptr) {
-    if (isdigit(*expression_ptr)) {
-      expression_ptr = identify_number_in_expression(expression_ptr, &numbers);
-      if (is_negative_number) {
-        is_negative_number = 0;
-        numbers.top->value *= -1;
-      }
-      is_operator_last = 0;
-      if (in_brackets_flag) {
-        numbers_in_brackets++;
-      }
-    } else {
-      expression_ptr = identify_operator_in_expression(
-          expression_ptr, &operators, &numbers, &is_operator_last,
-          &is_negative_number, &in_brackets_flag, &numbers_in_brackets);
-    }
-  }
-
-  // stack_print(&numbers);
-  // stack_print(&operators);
-
-  while (!stack_is_empty(&operators)) {
-    calculate_last_operation(&numbers, &operators);
-  }
-
-  result = stack_pop_number(&numbers);
-  stack_clear(&numbers);
-  stack_clear(&operators);
-
-  return result;
 }
 
 char* evaluate_math_functions(char* expression, Stack* operators) {
@@ -146,45 +143,45 @@ char* evaluate_math_functions(char* expression, Stack* operators) {
   return expression;
 }
 
-char* evaluate_operators(char* expression, Stack* numbers, Stack* operators, int* in_brackets_flag, int* is_operator_last, int* numbers_in_brackets) {
+char* evaluate_operators(char* expression, Stack* numbers, Stack* operators, s_options* options) {
   Node cur_node;
   double tmp_result = 0;
   cur_node = get_node_operators(expression);  // текущая нода операции
   // левую скобку сразу закидываем в стек
   if (cur_node.math_operator== LEFT_BRACKET) {
     stack_push(operators, cur_node.value, cur_node.math_operator, cur_node.priority);
-    *in_brackets_flag += 1;
-    *is_operator_last = 1;
+    options->in_brackets_flag += 1;
+    options->is_operator_last = 1;
   } else if (stack_is_empty(operators)) {  // либо если стек пуст
     stack_push(operators, cur_node.value, cur_node.math_operator, cur_node.priority);
-    *is_operator_last = 1;
+    options->is_operator_last = 1;
   } else if (cur_node.math_operator == RIGHT_BRACKET) {
-    if (*numbers_in_brackets > 1) {
+    if (options->numbers_in_brackets > 1) {
       while (operators->top->math_operator != LEFT_BRACKET) {
         calculate_last_operation(numbers, operators);
-        *numbers_in_brackets -= 1;
+        options->numbers_in_brackets -= 1;
       }
     }
     if (stack_top_operator(operators) == LEFT_BRACKET) {
       stack_pop_operator(operators);  // сброс левой скобки из стека
-      *in_brackets_flag -= 1;
+      options->in_brackets_flag -= 1;
     }
     if (!stack_is_empty(operators) && stack_top_operator(operators) >= SQRT && stack_top_operator(operators) <= LG) {
       tmp_result = calculate_math_function(stack_pop_number(numbers), stack_pop_operator(operators));
       stack_push(numbers, tmp_result, NUMBER, 0);
     }
-    if (!in_brackets_flag) {
-      *numbers_in_brackets = 0;
+    if (!options->in_brackets_flag) {
+      options->numbers_in_brackets = 0;
     }
   } else if (cur_node.priority <= operators->top->priority) {
     while (!stack_is_empty(operators) && cur_node.priority <= operators->top->priority) {
       calculate_last_operation(numbers, operators);
     }
     stack_push(operators, cur_node.value, cur_node.math_operator, cur_node.priority);
-    *is_operator_last = 1;
+    options->is_operator_last = 1;
   } else {  // иначе просто закидываем оператор в стек
     stack_push(operators, cur_node.value, cur_node.math_operator, cur_node.priority);
-    *is_operator_last = 1;
+    options->is_operator_last = 1;
   }
   if(is_mod(expression)) {
     expression += 3;
@@ -255,9 +252,31 @@ double calculate_math_function(double a, int math_operator) {
   return result;
 }
 
-void calculate_last_operation(Stack* numbers, Stack* operators) {
-  double b = stack_pop_number(numbers);
-  double a = stack_pop_number(numbers);
-  double tmp_result = calculate_operation(a, b, stack_pop_operator(operators));
-  stack_push(numbers, tmp_result, NUMBER, 0);
+int calculate_last_operation(Stack* numbers, Stack* operators) {
+  int return_code = 0;
+  double a, b, tmp_result;
+  int math_operator;
+  if(!(stack_is_empty(operators) && stack_size(numbers) == 1)) {
+    if(!stack_is_empty(operators)) {
+      math_operator = stack_pop_operator(operators);
+    } else {
+      return_code = 1;
+    }
+    if(stack_size(numbers) >= 2) {
+      b = stack_pop_number(numbers);
+    } else {
+      return_code = 1;
+    }
+    if(!stack_is_empty(numbers)) {
+      a = stack_pop_number(numbers);
+    } else {
+      return_code = 1;
+    }
+    if(0 == return_code) {
+      tmp_result = calculate_operation(a, b, math_operator);
+      stack_push(numbers, tmp_result, NUMBER, 0);
+    }
+  }
+
+  return return_code;
 }
