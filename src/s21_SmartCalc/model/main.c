@@ -3,8 +3,8 @@
 // int main() {
 
 //   double res = 0;
-//   char *expression = "(1+2)*3^2^2-6/(7+8/9)";
-//   res = evaluate_expression(expression);
+//   char *expression = "x-2";
+//   evaluate_expression(expression, &res, 6.0);
 
 //   printf("res = %lf", res);
 

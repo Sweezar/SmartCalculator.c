@@ -26,6 +26,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->operation_button_sub, SIGNAL(clicked()), this, SLOT(add_button_text())); // -
     connect(ui->operation_button_mult, SIGNAL(clicked()), this, SLOT(add_button_text())); // *
     connect(ui->operation_button_div, SIGNAL(clicked()), this, SLOT(add_button_text())); // /
+    connect(ui->operation_button_pow, SIGNAL(clicked()), this, SLOT(add_button_text())); // ^
     connect(ui->operation_button_left_bracket, SIGNAL(clicked()), this, SLOT(add_button_text())); // (
     connect(ui->operation_button_right_bracket, SIGNAL(clicked()), this, SLOT(add_button_text())); // )
     connect(ui->operation_button_clear, SIGNAL(clicked()), this, SLOT(clean_window())); // C
@@ -39,9 +40,9 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->operation_button_sin, SIGNAL(clicked()), this, SLOT(add_math_function())); // sin
     connect(ui->operation_button_tan, SIGNAL(clicked()), this, SLOT(add_math_function())); // tan
 
-//    connect(ui->operation_button_sign, SIGNAL(clicked()), this, SLOT(set_sign())); // +/-
+    connect(ui->operation_button_x, SIGNAL(clicked()), this, SLOT(x_button_clicked())); // X
 
-    connect(ui->operation_button_result, SIGNAL(clicked()), this, SLOT(calculate()));
+    connect(ui->operation_button_result, SIGNAL(clicked()), this, SLOT(calculate())); // =
 }
 
 MainWindow::~MainWindow()
@@ -68,7 +69,8 @@ void MainWindow::calculate()
       char* currentTextCStr = currentTextUtf8.data();
 
     double res;
-    if(0 == evaluate_expression(currentTextCStr, &res)) {
+    double x = ui->x_show->value();
+    if(0 == evaluate_expression(currentTextCStr, &res, x)) {
         ui->result_show->setText(QString::number(res));
     } else {
         ui->result_show->setText("ERROR");
@@ -98,13 +100,20 @@ void MainWindow::add_math_function()
     ui->result_show->setText(allNumbers);
 }
 
+void MainWindow::x_button_clicked()
+{
+    add_button_text();
+//    QString x_number;
+
+}
+
 void MainWindow::keyPressEvent(QKeyEvent* pe)
 {
     int key = pe->key();
-        if (key >= Qt::Key_0 && key <= Qt::Key_9) {
-            QString keyString = QString::number(key - Qt::Key_0);
-            ui->result_show->setText(ui->result_show->text() + keyString);
-        } else {
-            QWidget::keyPressEvent(pe);
-        }
+    if (key >= Qt::Key_0 && key <= Qt::Key_9) {
+        QString keyString = QString::number(key - Qt::Key_0);
+        ui->result_show->setText(ui->result_show->text() + keyString);
+    } else {
+        QWidget::keyPressEvent(pe);
+    }
 }

@@ -12,15 +12,14 @@
 typedef struct {
 	int error_code;
 	int is_operator_last;
-	int is_negative_number;
 	int numbers_in_brackets;
 	int in_brackets_flag;
 } s_options;
 
 
-int evaluate_expression(char *expression, double* result);
+int evaluate_expression(char *expression, double* result, double x);
 Node get_node_operators(char *expression);
-char *identify_number_in_expression(char *expression, Stack *numbers);
+char *identify_number_in_expression(char *expression, Stack *numbers, s_options* options);
 char* identify_operator_in_expression(char* expression, Stack* operators, Stack* numbers, s_options* options);
 char *evaluate_math_functions(char *expression, Stack *operators);
 char* evaluate_operators(char* expression, Stack* numbers, Stack* operators, s_options* options);

@@ -22,6 +22,7 @@ private slots:
     void clean_window();
     void remove_symbol();
     void add_math_function();
+    void x_button_clicked();
 
 protected:
     void keyPressEvent(QKeyEvent *pe) override;
