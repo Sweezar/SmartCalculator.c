@@ -43,6 +43,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->operation_button_x, SIGNAL(clicked()), this, SLOT(x_button_clicked())); // X
 
     connect(ui->operation_button_result, SIGNAL(clicked()), this, SLOT(calculate())); // =
+
+    ui->radioButton_default->isChecked();
 }
 
 MainWindow::~MainWindow()

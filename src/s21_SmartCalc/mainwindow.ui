@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>506</width>
-    <height>563</height>
+    <width>581</width>
+    <height>532</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,7 +15,7 @@
   </property>
   <property name="styleSheet">
    <string notr="true">QPushButton {
-	border: 2px solid grey;
+	border: 2px solid #7409c7;
 	border-radius: 10px;
 	font-size: 36px;
 	line-height: 60px;
@@ -23,17 +23,25 @@
 
 QPushButton::pressed {
 	color: black;
-	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #dadbde, stop: 1 #f6f7fa);
+	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #ffffff, stop: 1 #5462c3);
 }
+
+MainWindow {
+	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #5462c3, stop: 1 #ba872c);
+}
+
 </string>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
    <widget class="QLabel" name="result_show">
     <property name="geometry">
      <rect>
-      <x>14</x>
-      <y>8</y>
-      <width>481</width>
+      <x>9</x>
+      <y>5</y>
+      <width>561</width>
       <height>80</height>
      </rect>
     </property>
@@ -41,7 +49,8 @@ QPushButton::pressed {
      <string notr="true">font: 36pt &quot;PT Sans&quot;;
 color: rgb(10, 10, 10);
 background-color: rgb(250, 250, 250);
-padding: 15px</string>
+padding: 15px;
+border: 2px solid #7409c7;</string>
     </property>
     <property name="text">
      <string/>
@@ -53,8 +62,8 @@ padding: 15px</string>
    <widget class="QPushButton" name="number_button_4">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>300</y>
+      <x>9</x>
+      <y>275</y>
       <width>81</width>
       <height>61</height>
      </rect>
@@ -66,8 +75,8 @@ padding: 15px</string>
    <widget class="QPushButton" name="number_button_7">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>240</y>
+      <x>9</x>
+      <y>215</y>
       <width>81</width>
       <height>61</height>
      </rect>
@@ -79,8 +88,8 @@ padding: 15px</string>
    <widget class="QPushButton" name="number_button_1">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>360</y>
+      <x>9</x>
+      <y>335</y>
       <width>81</width>
       <height>61</height>
      </rect>
@@ -92,8 +101,8 @@ padding: 15px</string>
    <widget class="QPushButton" name="operation_button_clear">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>180</y>
+      <x>9</x>
+      <y>155</y>
       <width>81</width>
       <height>61</height>
      </rect>
@@ -108,8 +117,8 @@ padding: 15px</string>
    <widget class="QPushButton" name="operation_button_remove">
     <property name="geometry">
      <rect>
-      <x>90</x>
-      <y>180</y>
+      <x>89</x>
+      <y>155</y>
       <width>81</width>
       <height>61</height>
      </rect>
@@ -124,8 +133,8 @@ padding: 15px</string>
    <widget class="QPushButton" name="number_button_8">
     <property name="geometry">
      <rect>
-      <x>90</x>
-      <y>240</y>
+      <x>89</x>
+      <y>215</y>
       <width>81</width>
       <height>61</height>
      </rect>
@@ -137,8 +146,8 @@ padding: 15px</string>
    <widget class="QPushButton" name="number_button_2">
     <property name="geometry">
      <rect>
-      <x>90</x>
-      <y>360</y>
+      <x>89</x>
+      <y>335</y>
       <width>81</width>
       <height>61</height>
      </rect>
@@ -150,8 +159,8 @@ padding: 15px</string>
    <widget class="QPushButton" name="number_button_5">
     <property name="geometry">
      <rect>
-      <x>90</x>
-      <y>300</y>
+      <x>89</x>
+      <y>275</y>
       <width>81</width>
       <height>61</height>
      </rect>
@@ -163,9 +172,9 @@ padding: 15px</string>
    <widget class="QPushButton" name="number_button_0">
     <property name="geometry">
      <rect>
-      <x>90</x>
-      <y>420</y>
-      <width>81</width>
+      <x>9</x>
+      <y>395</y>
+      <width>161</width>
       <height>61</height>
      </rect>
     </property>
@@ -176,8 +185,8 @@ padding: 15px</string>
    <widget class="QPushButton" name="operation_button_dot">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>420</y>
+      <x>169</x>
+      <y>395</y>
       <width>81</width>
       <height>61</height>
      </rect>
@@ -192,8 +201,8 @@ padding: 15px</string>
    <widget class="QPushButton" name="number_button_9">
     <property name="geometry">
      <rect>
-      <x>170</x>
-      <y>240</y>
+      <x>169</x>
+      <y>215</y>
       <width>81</width>
       <height>61</height>
      </rect>
@@ -205,8 +214,8 @@ padding: 15px</string>
    <widget class="QPushButton" name="number_button_3">
     <property name="geometry">
      <rect>
-      <x>170</x>
-      <y>360</y>
+      <x>169</x>
+      <y>335</y>
       <width>81</width>
       <height>61</height>
      </rect>
@@ -218,8 +227,8 @@ padding: 15px</string>
    <widget class="QPushButton" name="number_button_6">
     <property name="geometry">
      <rect>
-      <x>170</x>
-      <y>300</y>
+      <x>169</x>
+      <y>275</y>
       <width>81</width>
       <height>61</height>
      </rect>
@@ -231,8 +240,8 @@ padding: 15px</string>
    <widget class="QPushButton" name="operation_button_mult">
     <property name="geometry">
      <rect>
-      <x>250</x>
-      <y>300</y>
+      <x>249</x>
+      <y>275</y>
       <width>81</width>
       <height>61</height>
      </rect>
@@ -247,8 +256,8 @@ padding: 15px</string>
    <widget class="QPushButton" name="operation_button_sum">
     <property name="geometry">
      <rect>
-      <x>250</x>
-      <y>420</y>
+      <x>249</x>
+      <y>395</y>
       <width>81</width>
       <height>61</height>
      </rect>
@@ -263,8 +272,8 @@ padding: 15px</string>
    <widget class="QPushButton" name="operation_button_sub">
     <property name="geometry">
      <rect>
-      <x>250</x>
-      <y>360</y>
+      <x>249</x>
+      <y>335</y>
       <width>81</width>
       <height>61</height>
      </rect>
@@ -279,8 +288,8 @@ padding: 15px</string>
    <widget class="QPushButton" name="operation_button_div">
     <property name="geometry">
      <rect>
-      <x>250</x>
-      <y>240</y>
+      <x>249</x>
+      <y>215</y>
       <width>81</width>
       <height>61</height>
      </rect>
@@ -295,8 +304,8 @@ padding: 15px</string>
    <widget class="QPushButton" name="operation_button_sin">
     <property name="geometry">
      <rect>
-      <x>330</x>
-      <y>180</y>
+      <x>409</x>
+      <y>155</y>
       <width>81</width>
       <height>61</height>
      </rect>
@@ -311,8 +320,8 @@ padding: 15px</string>
    <widget class="QPushButton" name="operation_button_lg">
     <property name="geometry">
      <rect>
-      <x>410</x>
-      <y>420</y>
+      <x>489</x>
+      <y>395</y>
       <width>81</width>
       <height>61</height>
      </rect>
@@ -327,8 +336,8 @@ padding: 15px</string>
    <widget class="QPushButton" name="operation_button_ln">
     <property name="geometry">
      <rect>
-      <x>330</x>
-      <y>420</y>
+      <x>409</x>
+      <y>395</y>
       <width>81</width>
       <height>61</height>
      </rect>
@@ -343,8 +352,8 @@ padding: 15px</string>
    <widget class="QPushButton" name="operation_button_cos">
     <property name="geometry">
      <rect>
-      <x>330</x>
-      <y>240</y>
+      <x>409</x>
+      <y>215</y>
       <width>81</width>
       <height>61</height>
      </rect>
@@ -359,8 +368,8 @@ padding: 15px</string>
    <widget class="QPushButton" name="operation_button_tan">
     <property name="geometry">
      <rect>
-      <x>330</x>
-      <y>300</y>
+      <x>409</x>
+      <y>275</y>
       <width>81</width>
       <height>61</height>
      </rect>
@@ -375,8 +384,8 @@ padding: 15px</string>
    <widget class="QPushButton" name="operation_button_left_bracket">
     <property name="geometry">
      <rect>
-      <x>170</x>
-      <y>180</y>
+      <x>169</x>
+      <y>155</y>
       <width>81</width>
       <height>61</height>
      </rect>
@@ -391,8 +400,8 @@ padding: 15px</string>
    <widget class="QPushButton" name="operation_button_right_bracket">
     <property name="geometry">
      <rect>
-      <x>250</x>
-      <y>180</y>
+      <x>249</x>
+      <y>155</y>
       <width>81</width>
       <height>61</height>
      </rect>
@@ -407,8 +416,8 @@ padding: 15px</string>
    <widget class="QPushButton" name="operation_button_atan">
     <property name="geometry">
      <rect>
-      <x>410</x>
-      <y>300</y>
+      <x>489</x>
+      <y>275</y>
       <width>81</width>
       <height>61</height>
      </rect>
@@ -423,8 +432,8 @@ padding: 15px</string>
    <widget class="QPushButton" name="operation_button_sqrt">
     <property name="geometry">
      <rect>
-      <x>330</x>
-      <y>360</y>
+      <x>409</x>
+      <y>335</y>
       <width>81</width>
       <height>61</height>
      </rect>
@@ -439,8 +448,8 @@ padding: 15px</string>
    <widget class="QPushButton" name="operation_button_pow">
     <property name="geometry">
      <rect>
-      <x>410</x>
-      <y>120</y>
+      <x>329</x>
+      <y>155</y>
       <width>81</width>
       <height>61</height>
      </rect>
@@ -455,8 +464,8 @@ padding: 15px</string>
    <widget class="QPushButton" name="operation_button_mod">
     <property name="geometry">
      <rect>
-      <x>410</x>
-      <y>360</y>
+      <x>489</x>
+      <y>335</y>
       <width>81</width>
       <height>61</height>
      </rect>
@@ -471,8 +480,8 @@ padding: 15px</string>
    <widget class="QPushButton" name="operation_button_asin">
     <property name="geometry">
      <rect>
-      <x>410</x>
-      <y>180</y>
+      <x>489</x>
+      <y>155</y>
       <width>81</width>
       <height>61</height>
      </rect>
@@ -487,8 +496,8 @@ padding: 15px</string>
    <widget class="QPushButton" name="operation_button_acos">
     <property name="geometry">
      <rect>
-      <x>410</x>
-      <y>240</y>
+      <x>489</x>
+      <y>215</y>
       <width>81</width>
       <height>61</height>
      </rect>
@@ -503,8 +512,8 @@ padding: 15px</string>
    <widget class="QRadioButton" name="radioButton_default">
     <property name="geometry">
      <rect>
-      <x>60</x>
-      <y>490</y>
+      <x>59</x>
+      <y>465</y>
       <width>111</width>
       <height>61</height>
      </rect>
@@ -516,12 +525,15 @@ font-size: 16px;</string>
     <property name="text">
      <string>default</string>
     </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
    </widget>
    <widget class="QRadioButton" name="radioButton_credit">
     <property name="geometry">
      <rect>
-      <x>280</x>
-      <y>490</y>
+      <x>279</x>
+      <y>465</y>
       <width>101</width>
       <height>61</height>
      </rect>
@@ -537,8 +549,8 @@ font-size: 16px;</string>
    <widget class="QRadioButton" name="radioButton_deposit">
     <property name="geometry">
      <rect>
-      <x>380</x>
-      <y>490</y>
+      <x>379</x>
+      <y>465</y>
       <width>111</width>
       <height>61</height>
      </rect>
@@ -554,10 +566,10 @@ font-size: 16px;</string>
    <widget class="QPushButton" name="operation_button_result">
     <property name="geometry">
      <rect>
-      <x>170</x>
-      <y>420</y>
+      <x>329</x>
+      <y>215</y>
       <width>81</width>
-      <height>61</height>
+      <height>241</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -567,11 +579,11 @@ font-size: 16px;</string>
      <string>=</string>
     </property>
    </widget>
-   <widget class="QRadioButton" name="radioButton_default_2">
+   <widget class="QRadioButton" name="radioButton_graph">
     <property name="geometry">
      <rect>
-      <x>170</x>
-      <y>490</y>
+      <x>169</x>
+      <y>465</y>
       <width>111</width>
       <height>61</height>
      </rect>
@@ -587,8 +599,8 @@ font-size: 16px;</string>
    <widget class="QPushButton" name="operation_button_x">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>120</y>
+      <x>9</x>
+      <y>95</y>
       <width>81</width>
       <height>61</height>
      </rect>
@@ -609,8 +621,8 @@ font-size: 16px;</string>
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>97</x>
-      <y>125</y>
+      <x>96</x>
+      <y>100</y>
       <width>71</width>
       <height>51</height>
      </rect>
@@ -625,9 +637,9 @@ font-size: 16px;</string>
    <widget class="QDoubleSpinBox" name="x_show">
     <property name="geometry">
      <rect>
-      <x>171</x>
-      <y>125</y>
-      <width>231</width>
+      <x>170</x>
+      <y>100</y>
+      <width>401</width>
       <height>51</height>
      </rect>
     </property>
@@ -638,6 +650,7 @@ border-radius: 10px;
 font-size: 24px;
 color: black;
 padding-left: 10px;
+border: 2px solid #7409c7;
 }
 QDoubleSpinBox::up-button {
 	width: 25px;
