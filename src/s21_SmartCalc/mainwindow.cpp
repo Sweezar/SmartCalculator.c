@@ -10,6 +10,9 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    int pos_x = 200;
+    int pos_y = 200;
+    move_main(pos_x, pos_y);
 
     connect(ui->number_button_0, SIGNAL(clicked()), this, SLOT(add_button_text()));
     connect(ui->number_button_1, SIGNAL(clicked()), this, SLOT(add_button_text()));
@@ -27,6 +30,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->operation_button_mult, SIGNAL(clicked()), this, SLOT(add_button_text())); // *
     connect(ui->operation_button_div, SIGNAL(clicked()), this, SLOT(add_button_text())); // /
     connect(ui->operation_button_pow, SIGNAL(clicked()), this, SLOT(add_button_text())); // ^
+    connect(ui->operation_button_mod, SIGNAL(clicked()), this, SLOT(add_button_text())); // mod
     connect(ui->operation_button_left_bracket, SIGNAL(clicked()), this, SLOT(add_button_text())); // (
     connect(ui->operation_button_right_bracket, SIGNAL(clicked()), this, SLOT(add_button_text())); // )
     connect(ui->operation_button_clear, SIGNAL(clicked()), this, SLOT(clean_window())); // C
@@ -39,17 +43,23 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->operation_button_cos, SIGNAL(clicked()), this, SLOT(add_math_function())); // cos
     connect(ui->operation_button_sin, SIGNAL(clicked()), this, SLOT(add_math_function())); // sin
     connect(ui->operation_button_tan, SIGNAL(clicked()), this, SLOT(add_math_function())); // tan
+    connect(ui->operation_button_ln, SIGNAL(clicked()), this, SLOT(add_math_function())); // ln
+    connect(ui->operation_button_log, SIGNAL(clicked()), this, SLOT(add_math_function())); // log
 
     connect(ui->operation_button_x, SIGNAL(clicked()), this, SLOT(x_button_clicked())); // X
 
     connect(ui->operation_button_result, SIGNAL(clicked()), this, SLOT(calculate())); // =
 
-    ui->radioButton_default->isChecked();
+
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::move_main(int pos_x, int pos_y) {
+  this->move(pos_x, pos_y);
 }
 
 void MainWindow::add_button_text()
@@ -119,3 +129,14 @@ void MainWindow::keyPressEvent(QKeyEvent* pe)
         QWidget::keyPressEvent(pe);
     }
 }
+
+
+void MainWindow::on_radioButton_graph_toggled(bool checked)
+{
+    if(checked) {
+        graph.show();
+    } else {
+        graph.close();
+    }
+}
+

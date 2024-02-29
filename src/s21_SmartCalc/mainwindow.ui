@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>581</width>
+    <width>579</width>
     <height>532</height>
    </rect>
   </property>
@@ -317,7 +317,7 @@ border: 2px solid #7409c7;</string>
      <string>sin</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="operation_button_lg">
+   <widget class="QPushButton" name="operation_button_log">
     <property name="geometry">
      <rect>
       <x>489</x>
@@ -330,7 +330,7 @@ border: 2px solid #7409c7;</string>
      <string notr="true"/>
     </property>
     <property name="text">
-     <string>lg</string>
+     <string>log</string>
     </property>
    </widget>
    <widget class="QPushButton" name="operation_button_ln">
@@ -660,6 +660,9 @@ QDoubleSpinBox::down-button {
 	width: 25px;
 	color: white;
 }</string>
+    </property>
+    <property name="buttonSymbols">
+     <enum>QAbstractSpinBox::PlusMinus</enum>
     </property>
     <property name="decimals">
      <number>7</number>

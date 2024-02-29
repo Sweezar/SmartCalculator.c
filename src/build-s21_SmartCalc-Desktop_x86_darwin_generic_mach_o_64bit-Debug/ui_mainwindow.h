@@ -43,7 +43,7 @@ public:
     QPushButton *operation_button_sub;
     QPushButton *operation_button_div;
     QPushButton *operation_button_sin;
-    QPushButton *operation_button_lg;
+    QPushButton *operation_button_log;
     QPushButton *operation_button_ln;
     QPushButton *operation_button_cos;
     QPushButton *operation_button_tan;
@@ -68,7 +68,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(581, 532);
+        MainWindow->resize(579, 532);
         MainWindow->setStyleSheet(QString::fromUtf8("QPushButton {\n"
 "	border: 2px solid #7409c7;\n"
 "	border-radius: 10px;\n"
@@ -160,10 +160,10 @@ public:
         operation_button_sin->setObjectName(QString::fromUtf8("operation_button_sin"));
         operation_button_sin->setGeometry(QRect(409, 155, 81, 61));
         operation_button_sin->setStyleSheet(QString::fromUtf8(""));
-        operation_button_lg = new QPushButton(centralwidget);
-        operation_button_lg->setObjectName(QString::fromUtf8("operation_button_lg"));
-        operation_button_lg->setGeometry(QRect(489, 395, 81, 61));
-        operation_button_lg->setStyleSheet(QString::fromUtf8(""));
+        operation_button_log = new QPushButton(centralwidget);
+        operation_button_log->setObjectName(QString::fromUtf8("operation_button_log"));
+        operation_button_log->setGeometry(QRect(489, 395, 81, 61));
+        operation_button_log->setStyleSheet(QString::fromUtf8(""));
         operation_button_ln = new QPushButton(centralwidget);
         operation_button_ln->setObjectName(QString::fromUtf8("operation_button_ln"));
         operation_button_ln->setGeometry(QRect(409, 395, 81, 61));
@@ -261,6 +261,7 @@ public:
 "	width: 25px;\n"
 "	color: white;\n"
 "}"));
+        x_show->setButtonSymbols(QAbstractSpinBox::PlusMinus);
         x_show->setDecimals(7);
         x_show->setMinimum(-82222222222222227285213184.000000000000000);
         x_show->setMaximum(72222222222222223031332868003463168.000000000000000);
@@ -293,7 +294,7 @@ public:
         operation_button_sub->setText(QCoreApplication::translate("MainWindow", "-", nullptr));
         operation_button_div->setText(QCoreApplication::translate("MainWindow", "/", nullptr));
         operation_button_sin->setText(QCoreApplication::translate("MainWindow", "sin", nullptr));
-        operation_button_lg->setText(QCoreApplication::translate("MainWindow", "lg", nullptr));
+        operation_button_log->setText(QCoreApplication::translate("MainWindow", "log", nullptr));
         operation_button_ln->setText(QCoreApplication::translate("MainWindow", "ln", nullptr));
         operation_button_cos->setText(QCoreApplication::translate("MainWindow", "cos", nullptr));
         operation_button_tan->setText(QCoreApplication::translate("MainWindow", "tan", nullptr));

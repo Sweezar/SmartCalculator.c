@@ -108,11 +108,13 @@ char* identify_number_in_expression(char* expression, Stack* numbers, s_options*
 
 char* identify_operator_in_expression(char* expression, Stack* operators, Stack* numbers, s_options* options) {
 
-  if (options->is_operator_last && *expression == '-') {  // если унарный минус
-    stack_push(numbers, 0, NUMBER, 0); 
-    stack_push(operators, 0, SUB, 6);
-    if(options->in_brackets_flag) {
-      options->numbers_in_brackets++;
+  if (options->is_operator_last && (*expression == '-' || *expression == '+')) { 
+    if(*expression == '-') { // если унарный минус
+      stack_push(numbers, 0, NUMBER, 0); 
+      stack_push(operators, 0, SUB, 6);
+      if(options->in_brackets_flag) {
+        options->numbers_in_brackets++;
+      }
     }
     
     expression += 1;
@@ -147,8 +149,8 @@ char* evaluate_math_functions(char* expression, Stack* operators) {
     stack_push(operators, 0, LN, 5);
     expression += 2;
   } else if (is_log(expression)) {
-    stack_push(operators, 0, LG, 5);
-    expression += 2;
+    stack_push(operators, 0, LOG, 5);
+    expression += 3;
   } else if (is_sqrt(expression)) {
     stack_push(operators, 0, SQRT, 5);
     expression += 4;
@@ -180,7 +182,7 @@ char* evaluate_operators(char* expression, Stack* numbers, Stack* operators, s_o
       stack_pop_operator(operators);  // сброс левой скобки из стека
       options->in_brackets_flag -= 1;
     }
-    if (!stack_is_empty(operators) && stack_top_operator(operators) >= SQRT && stack_top_operator(operators) <= LG) {
+    if (!stack_is_empty(operators) && stack_top_operator(operators) >= SQRT && stack_top_operator(operators) <= LOG) {
       tmp_result = calculate_math_function(stack_pop_number(numbers), stack_pop_operator(operators));
       stack_push(numbers, tmp_result, NUMBER, 0);
     }
@@ -259,7 +261,7 @@ double calculate_math_function(double a, int math_operator) {
     case LN:
       result = log(a);
       break;
-    case LG:
+    case LOG:
       result = log10(a);
       break;
   }

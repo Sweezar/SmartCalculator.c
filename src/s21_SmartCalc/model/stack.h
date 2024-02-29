@@ -25,7 +25,7 @@ typedef enum Operators {
   ACOS = 14,
   ATAN = 15,
   LN = 16,
-  LG = 17,
+  LOG = 17,
   LEFT_BRACKET = 18,
   RIGHT_BRACKET = 19,
 } Operators;

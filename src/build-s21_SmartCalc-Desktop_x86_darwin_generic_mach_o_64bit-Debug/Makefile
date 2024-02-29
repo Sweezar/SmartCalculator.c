@@ -14,10 +14,10 @@ EQ            = =
 
 CC            = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang
 CXX           = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++
-DEFINES       = -DQT_QML_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
+DEFINES       = -DQT_QML_DEBUG -DQT_PRINTSUPPORT_LIB -DQT_UITOOLS_LIB -DQT_OPENGLWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_OPENGL_LIB -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -g $(EXPORT_ARCH_ARGS) -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11 -Wall -Wextra -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -stdlib=libc++ -g -std=gnu++1z $(EXPORT_ARCH_ARGS) -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11 -Wall -Wextra -fPIC $(DEFINES)
-INCPATH       = -I../s21_SmartCalc -I. -I/usr/local/lib/QtWidgets.framework/Headers -I/usr/local/lib/QtGui.framework/Headers -I/usr/local/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/System/Library/Frameworks/AGL.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/System/Library/Frameworks/AGL.framework/Headers -I/usr/local/share/qt/mkspecs/macx-clang -F/usr/local/lib
+INCPATH       = -I../s21_SmartCalc -I. -I/usr/local/lib/QtPrintSupport.framework/Headers -I/usr/local/lib/QtUiTools.framework/Headers -I/usr/local/lib/QtOpenGLWidgets.framework/Headers -I/usr/local/lib/QtWidgets.framework/Headers -I/usr/local/lib/QtOpenGL.framework/Headers -I/usr/local/lib/QtGui.framework/Headers -I/usr/local/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/System/Library/Frameworks/AGL.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/System/Library/Frameworks/AGL.framework/Headers -I/usr/local/share/qt/mkspecs/macx-clang -F/usr/local/lib
 QMAKE         = /usr/local/Cellar/qt/6.2.3/bin/qmake6
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -40,7 +40,7 @@ DISTNAME      = s21_SmartCalc1.0.0
 DISTDIR = /Users/berneick/Desktop/C7_SmartCalc_v1.0-1/src/build-s21_SmartCalc-Desktop_x86_darwin_generic_mach_o_64bit-Debug/.tmp/s21_SmartCalc1.0.0
 LINK          = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++
 LFLAGS        = -stdlib=libc++ -headerpad_max_install_names $(EXPORT_ARCH_ARGS) -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11 -Wl,-rpath,@executable_path/../Frameworks -Wl,-rpath,/usr/local/lib
-LIBS          = $(SUBLIBS) -F/usr/local/lib -framework QtWidgets -framework QtGui -framework AppKit -framework ImageIO -framework Metal -framework QtCore -framework DiskArbitration -framework IOKit -framework AGL -framework OpenGL   
+LIBS          = $(SUBLIBS) -F/usr/local/lib -framework QtPrintSupport -framework ApplicationServices -framework QtUiTools -framework QtOpenGLWidgets -framework QtWidgets -framework QtOpenGL -framework QtGui -framework AppKit -framework ImageIO -framework Metal -framework QtCore -framework DiskArbitration -framework IOKit -lcups -framework AGL -framework OpenGL   
 AR            = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ar cq
 RANLIB        = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ranlib -s
 SED           = sed
@@ -52,19 +52,27 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = ../s21_SmartCalc/model/math_functions.c \
+SOURCES       = ../s21_SmartCalc/graph.cpp \
+		../s21_SmartCalc/model/math_functions.c \
 		../s21_SmartCalc/model/s21_smart_calc.c \
 		../s21_SmartCalc/model/stack.c \
 		../s21_SmartCalc/main.cpp \
-		../s21_SmartCalc/mainwindow.cpp qrc_qmake_qmake_qm_files.cpp \
-		moc_mainwindow.cpp
-OBJECTS       = math_functions.o \
+		../s21_SmartCalc/mainwindow.cpp \
+		../s21_SmartCalc/qcustomplot.cpp qrc_qmake_qmake_qm_files.cpp \
+		moc_graph.cpp \
+		moc_mainwindow.cpp \
+		moc_qcustomplot.cpp
+OBJECTS       = graph.o \
+		math_functions.o \
 		s21_smart_calc.o \
 		stack.o \
 		main.o \
 		mainwindow.o \
+		qcustomplot.o \
 		qrc_qmake_qmake_qm_files.o \
-		moc_mainwindow.o
+		moc_graph.o \
+		moc_mainwindow.o \
+		moc_qcustomplot.o
 DIST          = /usr/local/share/qt/mkspecs/features/spec_pre.prf \
 		/usr/local/share/qt/mkspecs/features/device_config.prf \
 		/usr/local/share/qt/mkspecs/common/unix.conf \
@@ -321,14 +329,18 @@ DIST          = /usr/local/share/qt/mkspecs/features/spec_pre.prf \
 		/usr/local/share/qt/mkspecs/features/exceptions.prf \
 		/usr/local/share/qt/mkspecs/features/yacc.prf \
 		/usr/local/share/qt/mkspecs/features/lex.prf \
-		../s21_SmartCalc/s21_SmartCalc.pro ../s21_SmartCalc/model/math_functions.h \
+		../s21_SmartCalc/s21_SmartCalc.pro ../s21_SmartCalc/graph.h \
+		../s21_SmartCalc/model/math_functions.h \
 		../s21_SmartCalc/model/s21_smart_calc.h \
 		../s21_SmartCalc/model/stack.h \
-		../s21_SmartCalc/mainwindow.h ../s21_SmartCalc/model/math_functions.c \
+		../s21_SmartCalc/mainwindow.h \
+		../s21_SmartCalc/qcustomplot.h ../s21_SmartCalc/graph.cpp \
+		../s21_SmartCalc/model/math_functions.c \
 		../s21_SmartCalc/model/s21_smart_calc.c \
 		../s21_SmartCalc/model/stack.c \
 		../s21_SmartCalc/main.cpp \
-		../s21_SmartCalc/mainwindow.cpp
+		../s21_SmartCalc/mainwindow.cpp \
+		../s21_SmartCalc/qcustomplot.cpp
 QMAKE_TARGET  = s21_SmartCalc
 DESTDIR       = 
 TARGET        = s21_SmartCalc.app/Contents/MacOS/s21_SmartCalc
@@ -349,7 +361,7 @@ include /usr/local/share/qt/mkspecs/features/mac/sdk.mk
 first: all
 ####### Build rules
 
-s21_SmartCalc.app/Contents/MacOS/s21_SmartCalc: ui_mainwindow.h $(OBJECTS)  
+s21_SmartCalc.app/Contents/MacOS/s21_SmartCalc: ui_graph.h ui_mainwindow.h $(OBJECTS)  
 	@test -d s21_SmartCalc.app/Contents/MacOS/ || mkdir -p s21_SmartCalc.app/Contents/MacOS/
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
@@ -611,7 +623,11 @@ Makefile: ../s21_SmartCalc/s21_SmartCalc.pro /usr/local/share/qt/mkspecs/macx-cl
 		/usr/local/share/qt/mkspecs/features/lex.prf \
 		../s21_SmartCalc/s21_SmartCalc.pro \
 		qmake_qmake_qm_files.qrc \
+		/usr/local/lib/QtPrintSupport.framework/Resources/QtPrintSupport.prl \
+		/usr/local/lib/QtUiTools.framework/Resources/QtUiTools.prl \
+		/usr/local/lib/QtOpenGLWidgets.framework/Resources/QtOpenGLWidgets.prl \
 		/usr/local/lib/QtWidgets.framework/Resources/QtWidgets.prl \
+		/usr/local/lib/QtOpenGL.framework/Resources/QtOpenGL.prl \
 		/usr/local/lib/QtGui.framework/Resources/QtGui.prl \
 		/usr/local/lib/QtCore.framework/Resources/QtCore.prl
 	$(QMAKE) -o Makefile ../s21_SmartCalc/s21_SmartCalc.pro -spec macx-clang CONFIG+=debug CONFIG+=qml_debug
@@ -873,7 +889,11 @@ Makefile: ../s21_SmartCalc/s21_SmartCalc.pro /usr/local/share/qt/mkspecs/macx-cl
 /usr/local/share/qt/mkspecs/features/lex.prf:
 ../s21_SmartCalc/s21_SmartCalc.pro:
 qmake_qmake_qm_files.qrc:
+/usr/local/lib/QtPrintSupport.framework/Resources/QtPrintSupport.prl:
+/usr/local/lib/QtUiTools.framework/Resources/QtUiTools.prl:
+/usr/local/lib/QtOpenGLWidgets.framework/Resources/QtOpenGLWidgets.prl:
 /usr/local/lib/QtWidgets.framework/Resources/QtWidgets.prl:
+/usr/local/lib/QtOpenGL.framework/Resources/QtOpenGL.prl:
 /usr/local/lib/QtGui.framework/Resources/QtGui.prl:
 /usr/local/lib/QtCore.framework/Resources/QtCore.prl:
 qmake: FORCE
@@ -908,9 +928,9 @@ distdir: FORCE
 	$(COPY_FILE) --parents ../s21_SmartCalc/s21_SmartCalc_ru_RU.ts $(DISTDIR)/
 	$(COPY_FILE) --parents qmake_qmake_qm_files.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/local/share/qt/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../s21_SmartCalc/model/math_functions.h ../s21_SmartCalc/model/s21_smart_calc.h ../s21_SmartCalc/model/stack.h ../s21_SmartCalc/mainwindow.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../s21_SmartCalc/model/math_functions.c ../s21_SmartCalc/model/s21_smart_calc.c ../s21_SmartCalc/model/stack.c ../s21_SmartCalc/main.cpp ../s21_SmartCalc/mainwindow.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../s21_SmartCalc/mainwindow.ui $(DISTDIR)/
+	$(COPY_FILE) --parents ../s21_SmartCalc/graph.h ../s21_SmartCalc/model/math_functions.h ../s21_SmartCalc/model/s21_smart_calc.h ../s21_SmartCalc/model/stack.h ../s21_SmartCalc/mainwindow.h ../s21_SmartCalc/qcustomplot.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../s21_SmartCalc/graph.cpp ../s21_SmartCalc/model/math_functions.c ../s21_SmartCalc/model/s21_smart_calc.c ../s21_SmartCalc/model/stack.c ../s21_SmartCalc/main.cpp ../s21_SmartCalc/mainwindow.cpp ../s21_SmartCalc/qcustomplot.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../s21_SmartCalc/graph.ui ../s21_SmartCalc/mainwindow.ui $(DISTDIR)/
 	$(COPY_FILE) --parents ../s21_SmartCalc/s21_SmartCalc_ru_RU.ts $(DISTDIR)/
 
 
@@ -958,25 +978,51 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /usr/local/share/qt/mkspecs/features/data/dummy.cpp
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -pipe -stdlib=libc++ -g -std=gnu++1z $(EXPORT_ARCH_ARGS) -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk -mmacosx-version-min=11 -Wall -Wextra -dM -E -o moc_predefs.h /usr/local/share/qt/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_mainwindow.cpp
+compiler_moc_header_make_all: moc_graph.cpp moc_mainwindow.cpp moc_qcustomplot.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_mainwindow.cpp
+	-$(DEL_FILE) moc_graph.cpp moc_mainwindow.cpp moc_qcustomplot.cpp
+moc_graph.cpp: ../s21_SmartCalc/graph.h \
+		/usr/local/lib/QtWidgets.framework/Headers/QFrame \
+		/usr/local/lib/QtWidgets.framework/Headers/qframe.h \
+		moc_predefs.h \
+		/usr/local/share/qt/libexec/moc
+	/usr/local/share/qt/libexec/moc $(DEFINES) --include /Users/berneick/Desktop/C7_SmartCalc_v1.0-1/src/build-s21_SmartCalc-Desktop_x86_darwin_generic_mach_o_64bit-Debug/moc_predefs.h -I/usr/local/share/qt/mkspecs/macx-clang -I/Users/berneick/Desktop/C7_SmartCalc_v1.0-1/src/s21_SmartCalc -I/usr/local/lib/QtPrintSupport.framework/Headers -I/usr/local/lib/QtUiTools.framework/Headers -I/usr/local/lib/QtOpenGLWidgets.framework/Headers -I/usr/local/lib/QtWidgets.framework/Headers -I/usr/local/lib/QtOpenGL.framework/Headers -I/usr/local/lib/QtGui.framework/Headers -I/usr/local/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/13.0.0/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/usr/local/lib ../s21_SmartCalc/graph.h -o moc_graph.cpp
+
 moc_mainwindow.cpp: ../s21_SmartCalc/mainwindow.h \
 		/usr/local/lib/QtWidgets.framework/Headers/QMainWindow \
 		/usr/local/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		/usr/local/lib/QtGui.framework/Headers/QKeyEvent \
 		/usr/local/lib/QtGui.framework/Headers/qevent.h \
+		../s21_SmartCalc/graph.h \
+		/usr/local/lib/QtWidgets.framework/Headers/QFrame \
+		/usr/local/lib/QtWidgets.framework/Headers/qframe.h \
 		moc_predefs.h \
 		/usr/local/share/qt/libexec/moc
-	/usr/local/share/qt/libexec/moc $(DEFINES) --include /Users/berneick/Desktop/C7_SmartCalc_v1.0-1/src/build-s21_SmartCalc-Desktop_x86_darwin_generic_mach_o_64bit-Debug/moc_predefs.h -I/usr/local/share/qt/mkspecs/macx-clang -I/Users/berneick/Desktop/C7_SmartCalc_v1.0-1/src/s21_SmartCalc -I/usr/local/lib/QtWidgets.framework/Headers -I/usr/local/lib/QtGui.framework/Headers -I/usr/local/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/13.0.0/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/usr/local/lib ../s21_SmartCalc/mainwindow.h -o moc_mainwindow.cpp
+	/usr/local/share/qt/libexec/moc $(DEFINES) --include /Users/berneick/Desktop/C7_SmartCalc_v1.0-1/src/build-s21_SmartCalc-Desktop_x86_darwin_generic_mach_o_64bit-Debug/moc_predefs.h -I/usr/local/share/qt/mkspecs/macx-clang -I/Users/berneick/Desktop/C7_SmartCalc_v1.0-1/src/s21_SmartCalc -I/usr/local/lib/QtPrintSupport.framework/Headers -I/usr/local/lib/QtUiTools.framework/Headers -I/usr/local/lib/QtOpenGLWidgets.framework/Headers -I/usr/local/lib/QtWidgets.framework/Headers -I/usr/local/lib/QtOpenGL.framework/Headers -I/usr/local/lib/QtGui.framework/Headers -I/usr/local/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/13.0.0/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/usr/local/lib ../s21_SmartCalc/mainwindow.h -o moc_mainwindow.cpp
+
+moc_qcustomplot.cpp: ../s21_SmartCalc/qcustomplot.h \
+		/usr/local/lib/QtCore.framework/Headers/qmath.h \
+		/usr/local/lib/QtOpenGL.framework/Headers/QOpenGLFramebufferObject \
+		/usr/local/lib/QtOpenGL.framework/Headers/qopenglframebufferobject.h \
+		/usr/local/lib/QtOpenGL.framework/Headers/QOpenGLPaintDevice \
+		/usr/local/lib/QtOpenGL.framework/Headers/qopenglpaintdevice.h \
+		/usr/local/lib/QtCore.framework/Headers/qnumeric.h \
+		/usr/local/lib/QtCore.framework/Headers/QtNumeric \
+		moc_predefs.h \
+		/usr/local/share/qt/libexec/moc
+	/usr/local/share/qt/libexec/moc $(DEFINES) --include /Users/berneick/Desktop/C7_SmartCalc_v1.0-1/src/build-s21_SmartCalc-Desktop_x86_darwin_generic_mach_o_64bit-Debug/moc_predefs.h -I/usr/local/share/qt/mkspecs/macx-clang -I/Users/berneick/Desktop/C7_SmartCalc_v1.0-1/src/s21_SmartCalc -I/usr/local/lib/QtPrintSupport.framework/Headers -I/usr/local/lib/QtUiTools.framework/Headers -I/usr/local/lib/QtOpenGLWidgets.framework/Headers -I/usr/local/lib/QtWidgets.framework/Headers -I/usr/local/lib/QtOpenGL.framework/Headers -I/usr/local/lib/QtGui.framework/Headers -I/usr/local/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/13.0.0/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.1.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/usr/local/lib ../s21_SmartCalc/qcustomplot.h -o moc_qcustomplot.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_mainwindow.h
+compiler_uic_make_all: ui_graph.h ui_mainwindow.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_mainwindow.h
+	-$(DEL_FILE) ui_graph.h ui_mainwindow.h
+ui_graph.h: ../s21_SmartCalc/graph.ui \
+		/usr/local/share/qt/libexec/uic
+	/usr/local/share/qt/libexec/uic ../s21_SmartCalc/graph.ui -o ui_graph.h
+
 ui_mainwindow.h: ../s21_SmartCalc/mainwindow.ui \
 		/usr/local/share/qt/libexec/uic
 	/usr/local/share/qt/libexec/uic ../s21_SmartCalc/mainwindow.ui -o ui_mainwindow.h
@@ -992,6 +1038,12 @@ compiler_lex_clean:
 compiler_clean: compiler_lrelease_clean compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
 
 ####### Compile
+
+graph.o: ../s21_SmartCalc/graph.cpp ../s21_SmartCalc/graph.h \
+		/usr/local/lib/QtWidgets.framework/Headers/QFrame \
+		/usr/local/lib/QtWidgets.framework/Headers/qframe.h \
+		ui_graph.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o graph.o ../s21_SmartCalc/graph.cpp
 
 math_functions.o: ../s21_SmartCalc/model/math_functions.c 
 	$(CC) -c $(CFLAGS) $(INCPATH) -o math_functions.o ../s21_SmartCalc/model/math_functions.c
@@ -1009,6 +1061,9 @@ main.o: ../s21_SmartCalc/main.cpp ../s21_SmartCalc/mainwindow.h \
 		/usr/local/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		/usr/local/lib/QtGui.framework/Headers/QKeyEvent \
 		/usr/local/lib/QtGui.framework/Headers/qevent.h \
+		../s21_SmartCalc/graph.h \
+		/usr/local/lib/QtWidgets.framework/Headers/QFrame \
+		/usr/local/lib/QtWidgets.framework/Headers/qframe.h \
 		/usr/local/lib/QtWidgets.framework/Headers/QApplication \
 		/usr/local/lib/QtWidgets.framework/Headers/qapplication.h \
 		/usr/local/lib/QtCore.framework/Headers/QLocale \
@@ -1022,17 +1077,36 @@ mainwindow.o: ../s21_SmartCalc/mainwindow.cpp ../s21_SmartCalc/mainwindow.h \
 		/usr/local/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		/usr/local/lib/QtGui.framework/Headers/QKeyEvent \
 		/usr/local/lib/QtGui.framework/Headers/qevent.h \
+		../s21_SmartCalc/graph.h \
+		/usr/local/lib/QtWidgets.framework/Headers/QFrame \
+		/usr/local/lib/QtWidgets.framework/Headers/qframe.h \
 		ui_mainwindow.h \
 		../s21_SmartCalc/model/s21_smart_calc.h \
 		../s21_SmartCalc/model/math_functions.h \
 		../s21_SmartCalc/model/stack.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../s21_SmartCalc/mainwindow.cpp
 
+qcustomplot.o: ../s21_SmartCalc/qcustomplot.cpp ../s21_SmartCalc/qcustomplot.h \
+		/usr/local/lib/QtCore.framework/Headers/qmath.h \
+		/usr/local/lib/QtOpenGL.framework/Headers/QOpenGLFramebufferObject \
+		/usr/local/lib/QtOpenGL.framework/Headers/qopenglframebufferobject.h \
+		/usr/local/lib/QtOpenGL.framework/Headers/QOpenGLPaintDevice \
+		/usr/local/lib/QtOpenGL.framework/Headers/qopenglpaintdevice.h \
+		/usr/local/lib/QtCore.framework/Headers/qnumeric.h \
+		/usr/local/lib/QtCore.framework/Headers/QtNumeric
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qcustomplot.o ../s21_SmartCalc/qcustomplot.cpp
+
 qrc_qmake_qmake_qm_files.o: qrc_qmake_qmake_qm_files.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_qmake_qmake_qm_files.o qrc_qmake_qmake_qm_files.cpp
 
+moc_graph.o: moc_graph.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_graph.o moc_graph.cpp
+
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp
+
+moc_qcustomplot.o: moc_qcustomplot.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_qcustomplot.o moc_qcustomplot.cpp
 
 ####### Install
 
