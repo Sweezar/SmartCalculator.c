@@ -134,6 +134,7 @@ void MainWindow::keyPressEvent(QKeyEvent* pe)
 void MainWindow::on_radioButton_graph_toggled(bool checked)
 {
     if(checked) {
+        graph.move(200 + this.width(), 200);
         graph.show();
     } else {
         graph.close();

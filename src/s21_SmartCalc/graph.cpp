@@ -6,10 +6,6 @@ Graph::Graph(QWidget *parent) :
     ui(new Ui::Graph)
 {
     ui->setupUi(this);
-
-    int pos_x = 200+ QMainWindow::width();
-    int pos_y = 200;
-    move_graph(pos_x, pos_y);
 }
 
 Graph::~Graph()
