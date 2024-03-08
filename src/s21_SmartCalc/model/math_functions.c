@@ -1,3 +1,5 @@
+#include "math_functions.h"
+
 int is_cos(const char* string) {
   return string[0] == 'c' && string[1] == 'o' && string[2] == 's';
 }

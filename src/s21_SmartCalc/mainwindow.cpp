@@ -1,10 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-extern "C" {
-#include "./model/s21_smart_calc.h"
-}
-
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -31,6 +27,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->operation_button_div, SIGNAL(clicked()), this, SLOT(add_button_text())); // /
     connect(ui->operation_button_pow, SIGNAL(clicked()), this, SLOT(add_button_text())); // ^
     connect(ui->operation_button_mod, SIGNAL(clicked()), this, SLOT(add_button_text())); // mod
+    connect(ui->operation_button_sqrt, SIGNAL(clicked()), this, SLOT(add_math_function())); // sqrt
     connect(ui->operation_button_left_bracket, SIGNAL(clicked()), this, SLOT(add_button_text())); // (
     connect(ui->operation_button_right_bracket, SIGNAL(clicked()), this, SLOT(add_button_text())); // )
     connect(ui->operation_button_clear, SIGNAL(clicked()), this, SLOT(clean_window())); // C
@@ -49,8 +46,6 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->operation_button_x, SIGNAL(clicked()), this, SLOT(x_button_clicked())); // X
 
     connect(ui->operation_button_result, SIGNAL(clicked()), this, SLOT(calculate())); // =
-
-
 }
 
 MainWindow::~MainWindow()
@@ -60,11 +55,13 @@ MainWindow::~MainWindow()
 
 void MainWindow::move_main(int pos_x, int pos_y) {
   this->move(pos_x, pos_y);
+  graph.move(pos_x + this->width(), pos_y);
 }
 
 void MainWindow::add_button_text()
 {
-    if(ui->result_show->text() == "ERROR") {
+    if(ui->result_show->text() == "ERROR")
+    {
         ui->result_show->setText("");
     }
     QPushButton *button = (QPushButton *)sender();
@@ -78,14 +75,25 @@ void MainWindow::calculate()
 {
     QString evaluate = ui->result_show->text();
     QByteArray currentTextUtf8 = evaluate.toUtf8();
-      char* currentTextCStr = currentTextUtf8.data();
+    char* currentTextCStr = currentTextUtf8.data();
 
-    double res;
-    double x = ui->x_show->value();
-    if(0 == evaluate_expression(currentTextCStr, &res, x)) {
-        ui->result_show->setText(QString::number(res));
-    } else {
-        ui->result_show->setText("ERROR");
+    if(ui->radioButton_default->isChecked())
+    {
+        double res;
+        double x = ui->x_show->value();
+        if(0 == evaluate_expression(currentTextCStr, &res, x))
+        {
+            ui->result_show->setText(QString::number(res));
+        }
+        else
+        {
+            ui->result_show->setText("ERROR");
+        }
+    }
+
+    if(ui->radioButton_graph->isChecked())
+    {
+        graph.drawing_graph(currentTextCStr);
     }
 }
 
@@ -134,10 +142,18 @@ void MainWindow::keyPressEvent(QKeyEvent* pe)
 void MainWindow::on_radioButton_graph_toggled(bool checked)
 {
     if(checked) {
-        graph.move(200 + this.width(), 200);
         graph.show();
     } else {
         graph.close();
+    }
+}
+
+void MainWindow::on_radioButton_credit_toggled(bool checked)
+{
+    if(checked) {
+        credit.show();
+    } else {
+        credit.close();
     }
 }
 

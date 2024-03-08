@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Resource object code
 **
-** Created by: The Resource Compiler for Qt version 6.2.3
+** Created by: The Resource Compiler for Qt version 6.6.2
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
@@ -40,7 +40,7 @@ static const unsigned char qt_resource_struct[] = {
 0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,
   // :/i18n/s21_SmartCalc_ru_RU.qm
   0x0,0x0,0x0,0xe,0x0,0x0,0x0,0x0,0x0,0x1,0x0,0x0,0x0,0x0,
-0x0,0x0,0x1,0x8d,0xd0,0x93,0x12,0xa0,
+0x0,0x0,0x1,0x8e,0x18,0x45,0x75,0x48,
 
 };
 
@@ -85,9 +85,18 @@ int QT_RCC_MANGLE_NAMESPACE(qCleanupResources_qmake_qmake_qm_files)()
     return 1;
 }
 
+#ifdef __clang__
+#   pragma clang diagnostic push
+#   pragma clang diagnostic ignored "-Wexit-time-destructors"
+#endif
+
 namespace {
    struct initializer {
        initializer() { QT_RCC_MANGLE_NAMESPACE(qInitResources_qmake_qmake_qm_files)(); }
        ~initializer() { QT_RCC_MANGLE_NAMESPACE(qCleanupResources_qmake_qmake_qm_files)(); }
    } dummy;
 }
+
+#ifdef __clang__
+#   pragma clang diagnostic pop
+#endif

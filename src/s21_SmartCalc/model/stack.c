@@ -69,29 +69,16 @@ void stack_clear(Stack *s) {
   s->size = 0;
 }
 
-void print_list(Node *top) {
-  Node *ptr = top;
-  while (ptr != NULL) {
-    if (ptr->math_operator) {
-      printf("%d - operator, \t", ptr->math_operator);
-    } else {
-      printf("%lf - number, \t", ptr->value);
-    }
-    ptr = ptr->next;
-  }
-}
-
-void stack_print(const Stack *s) { print_list(s->top); }
-
-// Stack get_inverse_stack(Stack *s) {
-//   Stack tmp;
-//   Node *ptr = s->top;
-//   stack_create(&tmp);
-
+// void print_list(Node *top) {
+//   Node *ptr = top;
 //   while (ptr != NULL) {
-//     stack_push(&tmp, ptr->value, ptr->operator, ptr->priority);
+//     if (ptr->math_operator) {
+//       printf("%d - operator, \t", ptr->math_operator);
+//     } else {
+//       printf("%lf - number, \t", ptr->value);
+//     }
 //     ptr = ptr->next;
 //   }
-
-//   return tmp;
 // }
+
+// void stack_print(const Stack *s) { print_list(s->top); }

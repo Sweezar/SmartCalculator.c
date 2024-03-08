@@ -3,7 +3,12 @@
 
 #include <QMainWindow>
 #include <QKeyEvent>
-#include <graph.h>>
+#include <graph.h>
+#include <credit.h>
+
+extern "C" {
+#include "./model/s21_smart_calc.h"
+}
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -28,11 +33,14 @@ private slots:
 
     void on_radioButton_graph_toggled(bool checked);
 
+    void on_radioButton_credit_toggled(bool checked);
+
 protected:
     void keyPressEvent(QKeyEvent *pe) override;
 
 private:
     Ui::MainWindow *ui;
     Graph graph;
+    Credit credit;
 };
 #endif // MAINWINDOW_H

@@ -270,8 +270,8 @@ double calculate_math_function(double a, int math_operator) {
 
 int calculate_last_operation(Stack* numbers, Stack* operators) {
   int return_code = 0;
-  double a, b, tmp_result;
-  int math_operator;
+  double a = 0, b = 0, tmp_result;
+  int math_operator = 0;
   if(!(stack_is_empty(operators) && stack_size(numbers) == 1)) {
     if(!stack_is_empty(operators)) {
       math_operator = stack_pop_operator(operators);
@@ -288,7 +288,7 @@ int calculate_last_operation(Stack* numbers, Stack* operators) {
     } else {
       return_code = 1;
     }
-    if(b == 0 && math_operator == DIVISION) {
+    if(0 == b && math_operator == DIVISION) {
       return_code = 1;
     }
     if(0 == return_code) {

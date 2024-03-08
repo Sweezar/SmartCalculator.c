@@ -2,6 +2,9 @@
 #define GRAPH_H
 
 #include <QFrame>
+extern "C" {
+#include "./model/s21_smart_calc.h"
+}
 
 namespace Ui {
 class Graph;
@@ -14,10 +17,14 @@ class Graph : public QFrame
 public:
     explicit Graph(QWidget *parent = nullptr);
     ~Graph();
-    void move_graph(int pos_x, int pos_y);
 
 private:
     Ui::Graph *ui;
+
+public slots:
+    void drawing_graph(char* ex);
 };
+
+
 
 #endif // GRAPH_H

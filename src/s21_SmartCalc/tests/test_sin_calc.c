@@ -40,6 +40,16 @@ START_TEST(test_sin_calc_4) {
 }
 END_TEST
 
+START_TEST(test_sin_calc_5) {
+  double res = 0;
+  double reference = 2 * -sin(5);
+  char *expression = "2*-sin(5)";
+  evaluate_expression(expression, &res, 0);
+
+  ck_assert_double_eq_tol(reference, res, ACCURACY);
+}
+END_TEST
+
 Suite *test_sin_calc(void) {
   Suite *s = suite_create("\033[45m-=SIN=-\033[0m");
   TCase *tc = tcase_create("SIN");
@@ -48,6 +58,7 @@ Suite *test_sin_calc(void) {
   tcase_add_test(tc, test_sin_calc_2);
   tcase_add_test(tc, test_sin_calc_3);
   tcase_add_test(tc, test_sin_calc_4);
+  tcase_add_test(tc, test_sin_calc_5);
 
   suite_add_tcase(s, tc);
   return s;

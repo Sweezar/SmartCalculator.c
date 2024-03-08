@@ -1,10 +1,9 @@
 // #include "s21_smart_calc.h"
+// #include "credit_calc.h"
 
 // int main() {
 
-//   double res = 0;
-//   char *expression = "log(12)";
-//   evaluate_expression(expression, &res, 6.0);
+//   double res = annuity(100000.0, 5.0, 12);
 
 //   printf("res = %lf", res);
 

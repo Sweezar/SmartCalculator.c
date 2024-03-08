@@ -55,8 +55,7 @@ operationLexem stack_pop_operator(Stack *s);
 int stack_is_empty(const Stack *s);
 void delete_list(Node *top);
 void stack_clear(Stack *s);
-void print_list(Node *top);
-void stack_print(const Stack *s);
-// Stack get_inverse_stack(Stack *s);
+// void print_list(Node *top);
+// void stack_print(const Stack *s);
 
 #endif
