@@ -11,6 +11,7 @@ QT += uitools
 
 SOURCES += \
     credit.cpp \
+    deposit.cpp \
     graph.cpp \
     model/credit_calc.c \
     model/math_functions.c \
@@ -22,6 +23,7 @@ SOURCES += \
 
 HEADERS += \
     credit.h \
+    deposit.h \
     graph.h \
     model/credit_calc.h \
     model/math_functions.h \
@@ -32,6 +34,7 @@ HEADERS += \
 
 FORMS += \
     credit.ui \
+    deposit.ui \
     graph.ui \
     mainwindow.ui
 

@@ -5,6 +5,7 @@
 #include <QKeyEvent>
 #include <graph.h>
 #include <credit.h>
+#include <deposit.h>
 
 extern "C" {
 #include "./model/s21_smart_calc.h"
@@ -35,6 +36,8 @@ private slots:
 
     void on_radioButton_credit_toggled(bool checked);
 
+    void on_radioButton_deposit_toggled(bool checked);
+
 protected:
     void keyPressEvent(QKeyEvent *pe) override;
 
@@ -42,5 +45,6 @@ private:
     Ui::MainWindow *ui;
     Graph graph;
     Credit credit;
+    Deposit deposit;
 };
 #endif // MAINWINDOW_H

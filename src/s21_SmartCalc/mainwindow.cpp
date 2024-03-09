@@ -157,3 +157,13 @@ void MainWindow::on_radioButton_credit_toggled(bool checked)
     }
 }
 
+
+void MainWindow::on_radioButton_deposit_toggled(bool checked)
+{
+    if(checked) {
+        deposit.show();
+    } else {
+        deposit.close();
+    }
+}
+

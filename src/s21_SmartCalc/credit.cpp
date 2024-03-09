@@ -42,7 +42,17 @@ void Credit::calculate()
         }
         else
         {
+            double monthly_payments[months];
+            differentiated(credit_sum, interest_rate, months, monthly_payments);
+            double total_payout = 0;
+            for(int i = 0; i < months; i++)
+            {
+                total_payout += monthly_payments[i];
+            }
+            ui->montly_payment_box->setText(QString::number(monthly_payments[0]) + " ... " + QString::number(monthly_payments[months - 1]));
 
+            ui->overpayment_box->setText(QString::number(total_payout - credit_sum));
+            ui->total_payout_box->setText(QString::number(total_payout));
         }
     }
 }

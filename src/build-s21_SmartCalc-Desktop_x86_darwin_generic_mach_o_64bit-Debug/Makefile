@@ -53,6 +53,7 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = ../s21_SmartCalc/credit.cpp \
+		../s21_SmartCalc/deposit.cpp \
 		../s21_SmartCalc/graph.cpp \
 		../s21_SmartCalc/model/credit_calc.c \
 		../s21_SmartCalc/model/math_functions.c \
@@ -62,10 +63,12 @@ SOURCES       = ../s21_SmartCalc/credit.cpp \
 		../s21_SmartCalc/mainwindow.cpp \
 		../s21_SmartCalc/qcustomplot.cpp qrc_qmake_qmake_qm_files.cpp \
 		moc_credit.cpp \
+		moc_deposit.cpp \
 		moc_graph.cpp \
 		moc_mainwindow.cpp \
 		moc_qcustomplot.cpp
 OBJECTS       = credit.o \
+		deposit.o \
 		graph.o \
 		credit_calc.o \
 		math_functions.o \
@@ -76,6 +79,7 @@ OBJECTS       = credit.o \
 		qcustomplot.o \
 		qrc_qmake_qmake_qm_files.o \
 		moc_credit.o \
+		moc_deposit.o \
 		moc_graph.o \
 		moc_mainwindow.o \
 		moc_qcustomplot.o
@@ -385,6 +389,7 @@ DIST          = /usr/local/Qt-6.6.2/mkspecs/features/spec_pre.prf \
 		/usr/local/Qt-6.6.2/mkspecs/features/yacc.prf \
 		/usr/local/Qt-6.6.2/mkspecs/features/lex.prf \
 		../s21_SmartCalc/s21_SmartCalc.pro ../s21_SmartCalc/credit.h \
+		../s21_SmartCalc/deposit.h \
 		../s21_SmartCalc/graph.h \
 		../s21_SmartCalc/model/credit_calc.h \
 		../s21_SmartCalc/model/math_functions.h \
@@ -392,6 +397,7 @@ DIST          = /usr/local/Qt-6.6.2/mkspecs/features/spec_pre.prf \
 		../s21_SmartCalc/model/stack.h \
 		../s21_SmartCalc/mainwindow.h \
 		../s21_SmartCalc/qcustomplot.h ../s21_SmartCalc/credit.cpp \
+		../s21_SmartCalc/deposit.cpp \
 		../s21_SmartCalc/graph.cpp \
 		../s21_SmartCalc/model/credit_calc.c \
 		../s21_SmartCalc/model/math_functions.c \
@@ -420,7 +426,7 @@ include /usr/local/Qt-6.6.2/mkspecs/features/mac/sdk.mk
 first: all
 ####### Build rules
 
-s21_SmartCalc.app/Contents/MacOS/s21_SmartCalc: ui_credit.h ui_graph.h ui_mainwindow.h $(OBJECTS)  
+s21_SmartCalc.app/Contents/MacOS/s21_SmartCalc: ui_credit.h ui_deposit.h ui_graph.h ui_mainwindow.h $(OBJECTS)  
 	@test -d s21_SmartCalc.app/Contents/MacOS/ || mkdir -p s21_SmartCalc.app/Contents/MacOS/
 	$(LINK) $(LFLAGS) -o $(TARGET)  $(OBJECTS) $(OBJCOMP) $(LIBS)
 
@@ -1080,9 +1086,9 @@ distdir: FORCE
 	$(COPY_FILE) --parents ../s21_SmartCalc/s21_SmartCalc_ru_RU.ts $(DISTDIR)/
 	$(COPY_FILE) --parents qmake_qmake_qm_files.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/local/Qt-6.6.2/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../s21_SmartCalc/credit.h ../s21_SmartCalc/graph.h ../s21_SmartCalc/model/credit_calc.h ../s21_SmartCalc/model/math_functions.h ../s21_SmartCalc/model/s21_smart_calc.h ../s21_SmartCalc/model/stack.h ../s21_SmartCalc/mainwindow.h ../s21_SmartCalc/qcustomplot.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../s21_SmartCalc/credit.cpp ../s21_SmartCalc/graph.cpp ../s21_SmartCalc/model/credit_calc.c ../s21_SmartCalc/model/math_functions.c ../s21_SmartCalc/model/s21_smart_calc.c ../s21_SmartCalc/model/stack.c ../s21_SmartCalc/main.cpp ../s21_SmartCalc/mainwindow.cpp ../s21_SmartCalc/qcustomplot.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../s21_SmartCalc/credit.ui ../s21_SmartCalc/graph.ui ../s21_SmartCalc/mainwindow.ui $(DISTDIR)/
+	$(COPY_FILE) --parents ../s21_SmartCalc/credit.h ../s21_SmartCalc/deposit.h ../s21_SmartCalc/graph.h ../s21_SmartCalc/model/credit_calc.h ../s21_SmartCalc/model/math_functions.h ../s21_SmartCalc/model/s21_smart_calc.h ../s21_SmartCalc/model/stack.h ../s21_SmartCalc/mainwindow.h ../s21_SmartCalc/qcustomplot.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../s21_SmartCalc/credit.cpp ../s21_SmartCalc/deposit.cpp ../s21_SmartCalc/graph.cpp ../s21_SmartCalc/model/credit_calc.c ../s21_SmartCalc/model/math_functions.c ../s21_SmartCalc/model/s21_smart_calc.c ../s21_SmartCalc/model/stack.c ../s21_SmartCalc/main.cpp ../s21_SmartCalc/mainwindow.cpp ../s21_SmartCalc/qcustomplot.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../s21_SmartCalc/credit.ui ../s21_SmartCalc/deposit.ui ../s21_SmartCalc/graph.ui ../s21_SmartCalc/mainwindow.ui $(DISTDIR)/
 	$(COPY_FILE) --parents ../s21_SmartCalc/s21_SmartCalc_ru_RU.ts $(DISTDIR)/
 
 
@@ -1130,9 +1136,9 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /usr/local/Qt-6.6.2/mkspecs/features/data/dummy.cpp
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -pipe -stdlib=libc++ -g -std=gnu++1z $(EXPORT_ARCH_ARGS) -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -mmacosx-version-min=11.0 -Wall -Wextra -fPIC -dM -E -o moc_predefs.h /usr/local/Qt-6.6.2/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_credit.cpp moc_graph.cpp moc_mainwindow.cpp moc_qcustomplot.cpp
+compiler_moc_header_make_all: moc_credit.cpp moc_deposit.cpp moc_graph.cpp moc_mainwindow.cpp moc_qcustomplot.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_credit.cpp moc_graph.cpp moc_mainwindow.cpp moc_qcustomplot.cpp
+	-$(DEL_FILE) moc_credit.cpp moc_deposit.cpp moc_graph.cpp moc_mainwindow.cpp moc_qcustomplot.cpp
 moc_credit.cpp: ../s21_SmartCalc/credit.h \
 		/usr/local/Qt-6.6.2/include/QtWidgets/QWidget \
 		/usr/local/Qt-6.6.2/include/QtWidgets/qwidget.h \
@@ -1298,6 +1304,172 @@ moc_credit.cpp: ../s21_SmartCalc/credit.h \
 		moc_predefs.h \
 		/usr/local/Qt-6.6.2/libexec/moc
 	/usr/local/Qt-6.6.2/libexec/moc $(DEFINES) --include /Users/berneick/Desktop/C7_SmartCalc_v1.0-1/src/build-s21_SmartCalc-Desktop_x86_darwin_generic_mach_o_64bit-Debug/moc_predefs.h -I/usr/local/Qt-6.6.2/mkspecs/macx-clang -I/Users/berneick/Desktop/C7_SmartCalc_v1.0-1/src/s21_SmartCalc -I/usr/local/Qt-6.6.2/include -I/usr/local/Qt-6.6.2/include/QtPrintSupport -I/usr/local/Qt-6.6.2/include/QtUiTools -I/usr/local/Qt-6.6.2/include/QtOpenGLWidgets -I/usr/local/Qt-6.6.2/include/QtWidgets -I/usr/local/Qt-6.6.2/include/QtOpenGL -I/usr/local/Qt-6.6.2/include/QtGui -I/usr/local/Qt-6.6.2/include/QtCore -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.3/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include ../s21_SmartCalc/credit.h -o moc_credit.cpp
+
+moc_deposit.cpp: ../s21_SmartCalc/deposit.h \
+		/usr/local/Qt-6.6.2/include/QtWidgets/QWidget \
+		/usr/local/Qt-6.6.2/include/QtWidgets/qwidget.h \
+		/usr/local/Qt-6.6.2/include/QtWidgets/qtwidgetsglobal.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qtguiglobal.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qglobal.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qtversionchecks.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qtconfiginclude.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qconfig.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qtcore-config.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qtconfigmacros.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qtcoreexports.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qcompilerdetection.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qsystemdetection.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qprocessordetection.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qtdeprecationmarkers.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qtpreprocessorsupport.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qassert.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qtnoop.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qtypes.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qtversion.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qtclasshelpermacros.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qtypeinfo.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qcontainerfwd.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qsysinfo.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qlogging.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qflags.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qcompare_impl.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qatomic.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qbasicatomic.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qatomic_cxx11.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qgenericatomic.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qconstructormacros.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qdarwinhelpers.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qexceptionhandling.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qforeach.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qttypetraits.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qfunctionpointer.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qglobalstatic.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qmalloc.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qminmax.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qnumeric.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qoverload.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qswap.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qtenvironmentvariables.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qtresource.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qttranslation.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qversiontagging.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qtgui-config.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qtguiexports.h \
+		/usr/local/Qt-6.6.2/include/QtWidgets/qtwidgets-config.h \
+		/usr/local/Qt-6.6.2/include/QtWidgets/qtwidgetsexports.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qwindowdefs.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qobjectdefs.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qnamespace.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qtmetamacros.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qobjectdefs_impl.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qfunctionaltools_impl.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qobject.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qstring.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qchar.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qstringview.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qbytearray.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qrefcount.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qarraydata.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qpair.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qarraydatapointer.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qarraydataops.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qcontainertools_impl.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qxptype_traits.h \
+		/usr/local/Qt-6.6.2/include/QtCore/q20functional.h \
+		/usr/local/Qt-6.6.2/include/QtCore/q20memory.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qbytearrayalgorithms.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qbytearrayview.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qstringfwd.h \
+		/usr/local/Qt-6.6.2/include/QtCore/q20type_traits.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qstringliteral.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qstringalgorithms.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qlatin1stringview.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qanystringview.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qutf8stringview.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qstringtokenizer.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qstringbuilder.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qlist.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qhashfunctions.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qiterator.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qbytearraylist.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qstringlist.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qalgorithms.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qstringmatcher.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qcoreevent.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qscopedpointer.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qmetatype.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qcompare.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qdatastream.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qiodevicebase.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qfloat16.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qmath.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qiterable.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qmetacontainer.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qcontainerinfo.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qtaggedpointer.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qscopeguard.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qobject_impl.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qbindingstorage.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qmargins.h \
+		/usr/local/Qt-6.6.2/include/QtCore/q23utility.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qaction.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qkeysequence.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qicon.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qsize.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qpixmap.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qpaintdevice.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qrect.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qpoint.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qcolor.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qrgb.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qrgba64.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qshareddata.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qimage.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qpixelformat.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qtransform.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qpolygon.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qregion.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qline.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qvariant.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qdebug.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qtextstream.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qstringconverter_base.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qcontiguouscache.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qsharedpointer.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qsharedpointer_impl.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qmap.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qshareddata_impl.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qset.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qhash.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qvarlengtharray.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qpalette.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qbrush.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qfont.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qfontmetrics.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qfontinfo.h \
+		/usr/local/Qt-6.6.2/include/QtWidgets/qsizepolicy.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qcursor.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qbitmap.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qevent.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qiodevice.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qpointer.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qurl.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qeventpoint.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qvector2d.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qvectornd.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qpointingdevice.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qinputdevice.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qscreen.h \
+		/usr/local/Qt-6.6.2/include/QtCore/QList \
+		/usr/local/Qt-6.6.2/include/QtCore/QObject \
+		/usr/local/Qt-6.6.2/include/QtCore/QRect \
+		/usr/local/Qt-6.6.2/include/QtCore/QSize \
+		/usr/local/Qt-6.6.2/include/QtCore/QSizeF \
+		/usr/local/Qt-6.6.2/include/QtGui/QTransform \
+		/usr/local/Qt-6.6.2/include/QtCore/qnativeinterface.h \
+		moc_predefs.h \
+		/usr/local/Qt-6.6.2/libexec/moc
+	/usr/local/Qt-6.6.2/libexec/moc $(DEFINES) --include /Users/berneick/Desktop/C7_SmartCalc_v1.0-1/src/build-s21_SmartCalc-Desktop_x86_darwin_generic_mach_o_64bit-Debug/moc_predefs.h -I/usr/local/Qt-6.6.2/mkspecs/macx-clang -I/Users/berneick/Desktop/C7_SmartCalc_v1.0-1/src/s21_SmartCalc -I/usr/local/Qt-6.6.2/include -I/usr/local/Qt-6.6.2/include/QtPrintSupport -I/usr/local/Qt-6.6.2/include/QtUiTools -I/usr/local/Qt-6.6.2/include/QtOpenGLWidgets -I/usr/local/Qt-6.6.2/include/QtWidgets -I/usr/local/Qt-6.6.2/include/QtOpenGL -I/usr/local/Qt-6.6.2/include/QtGui -I/usr/local/Qt-6.6.2/include/QtCore -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.3/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include ../s21_SmartCalc/deposit.h -o moc_deposit.cpp
 
 moc_graph.cpp: ../s21_SmartCalc/graph.h \
 		/usr/local/Qt-6.6.2/include/QtWidgets/QFrame \
@@ -2219,12 +2391,16 @@ compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_credit.h ui_graph.h ui_mainwindow.h
+compiler_uic_make_all: ui_credit.h ui_deposit.h ui_graph.h ui_mainwindow.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_credit.h ui_graph.h ui_mainwindow.h
+	-$(DEL_FILE) ui_credit.h ui_deposit.h ui_graph.h ui_mainwindow.h
 ui_credit.h: ../s21_SmartCalc/credit.ui \
 		/usr/local/Qt-6.6.2/libexec/uic
 	/usr/local/Qt-6.6.2/libexec/uic ../s21_SmartCalc/credit.ui -o ui_credit.h
+
+ui_deposit.h: ../s21_SmartCalc/deposit.ui \
+		/usr/local/Qt-6.6.2/libexec/uic
+	/usr/local/Qt-6.6.2/libexec/uic ../s21_SmartCalc/deposit.ui -o ui_deposit.h
 
 ui_graph.h: ../s21_SmartCalc/graph.ui \
 		/usr/local/Qt-6.6.2/libexec/uic \
@@ -3024,6 +3200,171 @@ credit.o: ../s21_SmartCalc/credit.cpp ../s21_SmartCalc/credit.h \
 		/usr/local/Qt-6.6.2/include/QtWidgets/QSpinBox \
 		../s21_SmartCalc/model/credit_calc.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o credit.o ../s21_SmartCalc/credit.cpp
+
+deposit.o: ../s21_SmartCalc/deposit.cpp ../s21_SmartCalc/deposit.h \
+		/usr/local/Qt-6.6.2/include/QtWidgets/QWidget \
+		/usr/local/Qt-6.6.2/include/QtWidgets/qwidget.h \
+		/usr/local/Qt-6.6.2/include/QtWidgets/qtwidgetsglobal.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qtguiglobal.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qglobal.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qtversionchecks.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qtconfiginclude.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qconfig.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qtcore-config.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qtconfigmacros.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qtcoreexports.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qcompilerdetection.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qsystemdetection.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qprocessordetection.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qtdeprecationmarkers.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qtpreprocessorsupport.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qassert.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qtnoop.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qtypes.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qtversion.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qtclasshelpermacros.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qtypeinfo.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qcontainerfwd.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qsysinfo.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qlogging.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qflags.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qcompare_impl.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qatomic.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qbasicatomic.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qatomic_cxx11.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qgenericatomic.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qconstructormacros.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qdarwinhelpers.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qexceptionhandling.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qforeach.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qttypetraits.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qfunctionpointer.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qglobalstatic.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qmalloc.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qminmax.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qnumeric.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qoverload.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qswap.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qtenvironmentvariables.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qtresource.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qttranslation.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qversiontagging.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qtgui-config.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qtguiexports.h \
+		/usr/local/Qt-6.6.2/include/QtWidgets/qtwidgets-config.h \
+		/usr/local/Qt-6.6.2/include/QtWidgets/qtwidgetsexports.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qwindowdefs.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qobjectdefs.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qnamespace.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qtmetamacros.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qobjectdefs_impl.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qfunctionaltools_impl.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qobject.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qstring.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qchar.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qstringview.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qbytearray.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qrefcount.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qarraydata.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qpair.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qarraydatapointer.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qarraydataops.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qcontainertools_impl.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qxptype_traits.h \
+		/usr/local/Qt-6.6.2/include/QtCore/q20functional.h \
+		/usr/local/Qt-6.6.2/include/QtCore/q20memory.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qbytearrayalgorithms.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qbytearrayview.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qstringfwd.h \
+		/usr/local/Qt-6.6.2/include/QtCore/q20type_traits.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qstringliteral.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qstringalgorithms.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qlatin1stringview.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qanystringview.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qutf8stringview.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qstringtokenizer.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qstringbuilder.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qlist.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qhashfunctions.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qiterator.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qbytearraylist.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qstringlist.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qalgorithms.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qstringmatcher.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qcoreevent.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qscopedpointer.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qmetatype.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qcompare.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qdatastream.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qiodevicebase.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qfloat16.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qmath.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qiterable.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qmetacontainer.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qcontainerinfo.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qtaggedpointer.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qscopeguard.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qobject_impl.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qbindingstorage.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qmargins.h \
+		/usr/local/Qt-6.6.2/include/QtCore/q23utility.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qaction.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qkeysequence.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qicon.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qsize.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qpixmap.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qpaintdevice.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qrect.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qpoint.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qcolor.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qrgb.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qrgba64.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qshareddata.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qimage.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qpixelformat.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qtransform.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qpolygon.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qregion.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qline.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qvariant.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qdebug.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qtextstream.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qstringconverter_base.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qcontiguouscache.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qsharedpointer.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qsharedpointer_impl.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qmap.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qshareddata_impl.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qset.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qhash.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qvarlengtharray.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qpalette.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qbrush.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qfont.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qfontmetrics.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qfontinfo.h \
+		/usr/local/Qt-6.6.2/include/QtWidgets/qsizepolicy.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qcursor.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qbitmap.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qevent.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qiodevice.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qpointer.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qurl.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qeventpoint.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qvector2d.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qvectornd.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qpointingdevice.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qinputdevice.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qscreen.h \
+		/usr/local/Qt-6.6.2/include/QtCore/QList \
+		/usr/local/Qt-6.6.2/include/QtCore/QObject \
+		/usr/local/Qt-6.6.2/include/QtCore/QRect \
+		/usr/local/Qt-6.6.2/include/QtCore/QSize \
+		/usr/local/Qt-6.6.2/include/QtCore/QSizeF \
+		/usr/local/Qt-6.6.2/include/QtGui/QTransform \
+		/usr/local/Qt-6.6.2/include/QtCore/qnativeinterface.h \
+		ui_deposit.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o deposit.o ../s21_SmartCalc/deposit.cpp
 
 graph.o: ../s21_SmartCalc/graph.cpp ../s21_SmartCalc/graph.h \
 		/usr/local/Qt-6.6.2/include/QtWidgets/QFrame \
@@ -4601,6 +4942,9 @@ qrc_qmake_qmake_qm_files.o: qrc_qmake_qmake_qm_files.cpp
 
 moc_credit.o: moc_credit.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_credit.o moc_credit.cpp
+
+moc_deposit.o: moc_deposit.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_deposit.o moc_deposit.cpp
 
 moc_graph.o: moc_graph.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_graph.o moc_graph.cpp
