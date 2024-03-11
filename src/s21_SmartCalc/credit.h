@@ -3,6 +3,10 @@
 
 #include <QWidget>
 
+extern "C" {
+#include "model/credit_calc.h"
+}
+
 namespace Ui {
 class Credit;
 }

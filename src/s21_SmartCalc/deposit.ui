@@ -38,12 +38,12 @@ QDateEdit{
 	background-color:  rgb(50, 50, 50);
 }</string>
   </property>
-  <widget class="QLabel" name="total_payout_box">
+  <widget class="QLabel" name="total_amount_box">
    <property name="geometry">
     <rect>
-     <x>510</x>
+     <x>490</x>
      <y>840</y>
-     <width>221</width>
+     <width>241</width>
      <height>41</height>
     </rect>
    </property>
@@ -101,11 +101,6 @@ color: white;</string>
    <item>
     <property name="text">
      <string>В конце срока</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Каждый день</string>
     </property>
    </item>
    <item>
@@ -210,12 +205,12 @@ padding-right: 10px;</string>
     <string>Периодичность выплат</string>
    </property>
   </widget>
-  <widget class="QLabel" name="overpayment_box">
+  <widget class="QLabel" name="tax_amount_box">
    <property name="geometry">
     <rect>
      <x>260</x>
      <y>840</y>
-     <width>241</width>
+     <width>221</width>
      <height>41</height>
     </rect>
    </property>
@@ -310,7 +305,7 @@ color: white;</string>
     <double>99999999.989999994635582</double>
    </property>
   </widget>
-  <widget class="QLabel" name="montly_payment_label">
+  <widget class="QLabel" name="interes_charges_label">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -325,10 +320,10 @@ color: white;</string>
     </font>
    </property>
    <property name="text">
-    <string>Ежемесячный платеж</string>
+    <string>Начисленные проценты</string>
    </property>
   </widget>
-  <widget class="QLabel" name="overpayment_label">
+  <widget class="QLabel" name="tax_amount_label">
    <property name="geometry">
     <rect>
      <x>260</x>
@@ -343,10 +338,10 @@ color: white;</string>
     </font>
    </property>
    <property name="text">
-    <string>Переплата по кредиту</string>
+    <string>Сумма налога</string>
    </property>
   </widget>
-  <widget class="QLabel" name="montly_payment_box">
+  <widget class="QLabel" name="interes_charges_box">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -371,12 +366,12 @@ color: white;</string>
     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
    </property>
   </widget>
-  <widget class="QLabel" name="total_payout_label">
+  <widget class="QLabel" name="total_amount_label">
    <property name="geometry">
     <rect>
-     <x>510</x>
+     <x>490</x>
      <y>790</y>
-     <width>221</width>
+     <width>241</width>
      <height>41</height>
     </rect>
    </property>
@@ -386,7 +381,7 @@ color: white;</string>
     </font>
    </property>
    <property name="text">
-    <string>Общая выплата</string>
+    <string>Сумма на вкладе к концу срока</string>
    </property>
   </widget>
   <widget class="QLabel" name="total_deposit_label">
@@ -504,6 +499,9 @@ border-left: 1px solid rgb(100,100,100);</string>
    </property>
    <property name="buttonSymbols">
     <enum>QAbstractSpinBox::NoButtons</enum>
+   </property>
+   <property name="suffix">
+    <string> %</string>
    </property>
    <property name="maximum">
     <double>99999999.989999994635582</double>
@@ -679,9 +677,9 @@ border-left: 1px solid rgb(100,100,100);</string>
   <widget class="QDoubleSpinBox" name="replenishments_box">
    <property name="geometry">
     <rect>
-     <x>280</x>
+     <x>270</x>
      <y>370</y>
-     <width>241</width>
+     <width>231</width>
      <height>51</height>
     </rect>
    </property>
@@ -709,7 +707,7 @@ border-left: 1px solid rgb(100,100,100);</string>
   <widget class="QPushButton" name="replenishments_push_button">
    <property name="geometry">
     <rect>
-     <x>530</x>
+     <x>680</x>
      <y>370</y>
      <width>51</width>
      <height>51</height>
@@ -819,12 +817,87 @@ border-left: 1px solid rgb(100,100,100);</string>
     </property>
    </item>
   </widget>
+  <widget class="QPushButton" name="withdrawals_push_button">
+   <property name="geometry">
+    <rect>
+     <x>680</x>
+     <y>570</y>
+     <width>51</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>+</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="replenishments_month_box">
+   <property name="geometry">
+    <rect>
+     <x>510</x>
+     <y>370</y>
+     <width>161</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(50, 50, 50);</string>
+   </property>
+   <property name="inputMethodHints">
+    <set>Qt::ImhDigitsOnly</set>
+   </property>
+   <property name="inputMask">
+    <string/>
+   </property>
+   <property name="text">
+    <string>0</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+   </property>
+   <property name="placeholderText">
+    <string>Месяц пополнения</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="withdrawals_month_box">
+   <property name="geometry">
+    <rect>
+     <x>510</x>
+     <y>570</y>
+     <width>161</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(50, 50, 50);</string>
+   </property>
+   <property name="inputMethodHints">
+    <set>Qt::ImhDigitsOnly</set>
+   </property>
+   <property name="inputMask">
+    <string/>
+   </property>
+   <property name="text">
+    <string>0</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+   </property>
+   <property name="placeholderText">
+    <string>Месяц пополнения</string>
+   </property>
+  </widget>
   <widget class="QDoubleSpinBox" name="withdrawals_box">
    <property name="geometry">
     <rect>
-     <x>280</x>
+     <x>270</x>
      <y>570</y>
-     <width>241</width>
+     <width>231</width>
      <height>51</height>
     </rect>
    </property>
@@ -849,17 +922,17 @@ border-left: 1px solid rgb(100,100,100);</string>
     <double>99999999.989999994635582</double>
    </property>
   </widget>
-  <widget class="QPushButton" name="withdrawals_push_button">
+  <widget class="QPushButton" name="replenishments_push_button_2">
    <property name="geometry">
     <rect>
-     <x>530</x>
-     <y>570</y>
+     <x>390</x>
+     <y>440</y>
      <width>51</width>
      <height>51</height>
     </rect>
    </property>
    <property name="text">
-    <string>+</string>
+    <string>-</string>
    </property>
   </widget>
  </widget>

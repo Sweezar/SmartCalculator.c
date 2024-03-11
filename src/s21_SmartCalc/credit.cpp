@@ -1,10 +1,6 @@
 #include "credit.h"
 #include "ui_credit.h"
 
-extern "C" {
-#include "model/credit_calc.h"
-}
-
 Credit::Credit(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::Credit)

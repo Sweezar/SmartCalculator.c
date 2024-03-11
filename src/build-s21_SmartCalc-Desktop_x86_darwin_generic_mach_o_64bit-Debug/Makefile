@@ -56,6 +56,7 @@ SOURCES       = ../s21_SmartCalc/credit.cpp \
 		../s21_SmartCalc/deposit.cpp \
 		../s21_SmartCalc/graph.cpp \
 		../s21_SmartCalc/model/credit_calc.c \
+		../s21_SmartCalc/model/deposit_calc.c \
 		../s21_SmartCalc/model/math_functions.c \
 		../s21_SmartCalc/model/s21_smart_calc.c \
 		../s21_SmartCalc/model/stack.c \
@@ -71,6 +72,7 @@ OBJECTS       = credit.o \
 		deposit.o \
 		graph.o \
 		credit_calc.o \
+		deposit_calc.o \
 		math_functions.o \
 		s21_smart_calc.o \
 		stack.o \
@@ -392,6 +394,7 @@ DIST          = /usr/local/Qt-6.6.2/mkspecs/features/spec_pre.prf \
 		../s21_SmartCalc/deposit.h \
 		../s21_SmartCalc/graph.h \
 		../s21_SmartCalc/model/credit_calc.h \
+		../s21_SmartCalc/model/deposit_calc.h \
 		../s21_SmartCalc/model/math_functions.h \
 		../s21_SmartCalc/model/s21_smart_calc.h \
 		../s21_SmartCalc/model/stack.h \
@@ -400,6 +403,7 @@ DIST          = /usr/local/Qt-6.6.2/mkspecs/features/spec_pre.prf \
 		../s21_SmartCalc/deposit.cpp \
 		../s21_SmartCalc/graph.cpp \
 		../s21_SmartCalc/model/credit_calc.c \
+		../s21_SmartCalc/model/deposit_calc.c \
 		../s21_SmartCalc/model/math_functions.c \
 		../s21_SmartCalc/model/s21_smart_calc.c \
 		../s21_SmartCalc/model/stack.c \
@@ -1086,8 +1090,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents ../s21_SmartCalc/s21_SmartCalc_ru_RU.ts $(DISTDIR)/
 	$(COPY_FILE) --parents qmake_qmake_qm_files.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/local/Qt-6.6.2/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../s21_SmartCalc/credit.h ../s21_SmartCalc/deposit.h ../s21_SmartCalc/graph.h ../s21_SmartCalc/model/credit_calc.h ../s21_SmartCalc/model/math_functions.h ../s21_SmartCalc/model/s21_smart_calc.h ../s21_SmartCalc/model/stack.h ../s21_SmartCalc/mainwindow.h ../s21_SmartCalc/qcustomplot.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../s21_SmartCalc/credit.cpp ../s21_SmartCalc/deposit.cpp ../s21_SmartCalc/graph.cpp ../s21_SmartCalc/model/credit_calc.c ../s21_SmartCalc/model/math_functions.c ../s21_SmartCalc/model/s21_smart_calc.c ../s21_SmartCalc/model/stack.c ../s21_SmartCalc/main.cpp ../s21_SmartCalc/mainwindow.cpp ../s21_SmartCalc/qcustomplot.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../s21_SmartCalc/credit.h ../s21_SmartCalc/deposit.h ../s21_SmartCalc/graph.h ../s21_SmartCalc/model/credit_calc.h ../s21_SmartCalc/model/deposit_calc.h ../s21_SmartCalc/model/math_functions.h ../s21_SmartCalc/model/s21_smart_calc.h ../s21_SmartCalc/model/stack.h ../s21_SmartCalc/mainwindow.h ../s21_SmartCalc/qcustomplot.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../s21_SmartCalc/credit.cpp ../s21_SmartCalc/deposit.cpp ../s21_SmartCalc/graph.cpp ../s21_SmartCalc/model/credit_calc.c ../s21_SmartCalc/model/deposit_calc.c ../s21_SmartCalc/model/math_functions.c ../s21_SmartCalc/model/s21_smart_calc.c ../s21_SmartCalc/model/stack.c ../s21_SmartCalc/main.cpp ../s21_SmartCalc/mainwindow.cpp ../s21_SmartCalc/qcustomplot.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../s21_SmartCalc/credit.ui ../s21_SmartCalc/deposit.ui ../s21_SmartCalc/graph.ui ../s21_SmartCalc/mainwindow.ui $(DISTDIR)/
 	$(COPY_FILE) --parents ../s21_SmartCalc/s21_SmartCalc_ru_RU.ts $(DISTDIR)/
 
@@ -1301,6 +1305,7 @@ moc_credit.cpp: ../s21_SmartCalc/credit.h \
 		/usr/local/Qt-6.6.2/include/QtCore/QSizeF \
 		/usr/local/Qt-6.6.2/include/QtGui/QTransform \
 		/usr/local/Qt-6.6.2/include/QtCore/qnativeinterface.h \
+		../s21_SmartCalc/model/credit_calc.h \
 		moc_predefs.h \
 		/usr/local/Qt-6.6.2/libexec/moc
 	/usr/local/Qt-6.6.2/libexec/moc $(DEFINES) --include /Users/berneick/Desktop/C7_SmartCalc_v1.0-1/src/build-s21_SmartCalc-Desktop_x86_darwin_generic_mach_o_64bit-Debug/moc_predefs.h -I/usr/local/Qt-6.6.2/mkspecs/macx-clang -I/Users/berneick/Desktop/C7_SmartCalc_v1.0-1/src/s21_SmartCalc -I/usr/local/Qt-6.6.2/include -I/usr/local/Qt-6.6.2/include/QtPrintSupport -I/usr/local/Qt-6.6.2/include/QtUiTools -I/usr/local/Qt-6.6.2/include/QtOpenGLWidgets -I/usr/local/Qt-6.6.2/include/QtWidgets -I/usr/local/Qt-6.6.2/include/QtOpenGL -I/usr/local/Qt-6.6.2/include/QtGui -I/usr/local/Qt-6.6.2/include/QtCore -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.3/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include ../s21_SmartCalc/credit.h -o moc_credit.cpp
@@ -1467,6 +1472,7 @@ moc_deposit.cpp: ../s21_SmartCalc/deposit.h \
 		/usr/local/Qt-6.6.2/include/QtCore/QSizeF \
 		/usr/local/Qt-6.6.2/include/QtGui/QTransform \
 		/usr/local/Qt-6.6.2/include/QtCore/qnativeinterface.h \
+		../s21_SmartCalc/model/deposit_calc.h \
 		moc_predefs.h \
 		/usr/local/Qt-6.6.2/libexec/moc
 	/usr/local/Qt-6.6.2/libexec/moc $(DEFINES) --include /Users/berneick/Desktop/C7_SmartCalc_v1.0-1/src/build-s21_SmartCalc-Desktop_x86_darwin_generic_mach_o_64bit-Debug/moc_predefs.h -I/usr/local/Qt-6.6.2/mkspecs/macx-clang -I/Users/berneick/Desktop/C7_SmartCalc_v1.0-1/src/s21_SmartCalc -I/usr/local/Qt-6.6.2/include -I/usr/local/Qt-6.6.2/include/QtPrintSupport -I/usr/local/Qt-6.6.2/include/QtUiTools -I/usr/local/Qt-6.6.2/include/QtOpenGLWidgets -I/usr/local/Qt-6.6.2/include/QtWidgets -I/usr/local/Qt-6.6.2/include/QtOpenGL -I/usr/local/Qt-6.6.2/include/QtGui -I/usr/local/Qt-6.6.2/include/QtCore -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.3/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include ../s21_SmartCalc/deposit.h -o moc_deposit.cpp
@@ -1814,6 +1820,9 @@ moc_mainwindow.cpp: ../s21_SmartCalc/mainwindow.h \
 		../s21_SmartCalc/model/stack.h \
 		../s21_SmartCalc/credit.h \
 		/usr/local/Qt-6.6.2/include/QtWidgets/QWidget \
+		../s21_SmartCalc/model/credit_calc.h \
+		../s21_SmartCalc/deposit.h \
+		../s21_SmartCalc/model/deposit_calc.h \
 		moc_predefs.h \
 		/usr/local/Qt-6.6.2/libexec/moc
 	/usr/local/Qt-6.6.2/libexec/moc $(DEFINES) --include /Users/berneick/Desktop/C7_SmartCalc_v1.0-1/src/build-s21_SmartCalc-Desktop_x86_darwin_generic_mach_o_64bit-Debug/moc_predefs.h -I/usr/local/Qt-6.6.2/mkspecs/macx-clang -I/Users/berneick/Desktop/C7_SmartCalc_v1.0-1/src/s21_SmartCalc -I/usr/local/Qt-6.6.2/include -I/usr/local/Qt-6.6.2/include/QtPrintSupport -I/usr/local/Qt-6.6.2/include/QtUiTools -I/usr/local/Qt-6.6.2/include/QtOpenGLWidgets -I/usr/local/Qt-6.6.2/include/QtWidgets -I/usr/local/Qt-6.6.2/include/QtOpenGL -I/usr/local/Qt-6.6.2/include/QtGui -I/usr/local/Qt-6.6.2/include/QtCore -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.3/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include ../s21_SmartCalc/mainwindow.h -o moc_mainwindow.cpp
@@ -3149,6 +3158,7 @@ credit.o: ../s21_SmartCalc/credit.cpp ../s21_SmartCalc/credit.h \
 		/usr/local/Qt-6.6.2/include/QtCore/QSizeF \
 		/usr/local/Qt-6.6.2/include/QtGui/QTransform \
 		/usr/local/Qt-6.6.2/include/QtCore/qnativeinterface.h \
+		../s21_SmartCalc/model/credit_calc.h \
 		ui_credit.h \
 		/usr/local/Qt-6.6.2/include/QtCore/QVariant \
 		/usr/local/Qt-6.6.2/include/QtWidgets/QApplication \
@@ -3197,8 +3207,7 @@ credit.o: ../s21_SmartCalc/credit.cpp ../s21_SmartCalc/credit.h \
 		/usr/local/Qt-6.6.2/include/QtWidgets/QPushButton \
 		/usr/local/Qt-6.6.2/include/QtWidgets/qpushbutton.h \
 		/usr/local/Qt-6.6.2/include/QtWidgets/qabstractbutton.h \
-		/usr/local/Qt-6.6.2/include/QtWidgets/QSpinBox \
-		../s21_SmartCalc/model/credit_calc.h
+		/usr/local/Qt-6.6.2/include/QtWidgets/QSpinBox
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o credit.o ../s21_SmartCalc/credit.cpp
 
 deposit.o: ../s21_SmartCalc/deposit.cpp ../s21_SmartCalc/deposit.h \
@@ -3363,7 +3372,64 @@ deposit.o: ../s21_SmartCalc/deposit.cpp ../s21_SmartCalc/deposit.h \
 		/usr/local/Qt-6.6.2/include/QtCore/QSizeF \
 		/usr/local/Qt-6.6.2/include/QtGui/QTransform \
 		/usr/local/Qt-6.6.2/include/QtCore/qnativeinterface.h \
-		ui_deposit.h
+		../s21_SmartCalc/model/deposit_calc.h \
+		ui_deposit.h \
+		/usr/local/Qt-6.6.2/include/QtCore/QVariant \
+		/usr/local/Qt-6.6.2/include/QtWidgets/QApplication \
+		/usr/local/Qt-6.6.2/include/QtWidgets/qapplication.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qcoreapplication.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qeventloop.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qcoreapplication_platform.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qfuture.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qfutureinterface.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qmutex.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qdeadlinetimer.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qelapsedtimer.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qtsan_impl.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qresultstore.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qfuture_impl.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qthreadpool.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qthread.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qrunnable.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qexception.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qpromise.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qguiapplication.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qinputmethod.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qlocale.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qguiapplication_platform.h \
+		/usr/local/Qt-6.6.2/include/QtWidgets/QCheckBox \
+		/usr/local/Qt-6.6.2/include/QtWidgets/qcheckbox.h \
+		/usr/local/Qt-6.6.2/include/QtWidgets/qabstractbutton.h \
+		/usr/local/Qt-6.6.2/include/QtWidgets/QComboBox \
+		/usr/local/Qt-6.6.2/include/QtWidgets/qcombobox.h \
+		/usr/local/Qt-6.6.2/include/QtWidgets/qabstractitemdelegate.h \
+		/usr/local/Qt-6.6.2/include/QtWidgets/qstyleoption.h \
+		/usr/local/Qt-6.6.2/include/QtWidgets/qabstractspinbox.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qvalidator.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qregularexpression.h \
+		/usr/local/Qt-6.6.2/include/QtWidgets/qslider.h \
+		/usr/local/Qt-6.6.2/include/QtWidgets/qabstractslider.h \
+		/usr/local/Qt-6.6.2/include/QtWidgets/qstyle.h \
+		/usr/local/Qt-6.6.2/include/QtWidgets/qtabbar.h \
+		/usr/local/Qt-6.6.2/include/QtWidgets/qtabwidget.h \
+		/usr/local/Qt-6.6.2/include/QtWidgets/qrubberband.h \
+		/usr/local/Qt-6.6.2/include/QtWidgets/qframe.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qabstractitemmodel.h \
+		/usr/local/Qt-6.6.2/include/QtWidgets/QDoubleSpinBox \
+		/usr/local/Qt-6.6.2/include/QtWidgets/qspinbox.h \
+		/usr/local/Qt-6.6.2/include/QtWidgets/QLabel \
+		/usr/local/Qt-6.6.2/include/QtWidgets/qlabel.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qpicture.h \
+		/usr/local/Qt-6.6.2/include/QtGui/qtextdocument.h \
+		/usr/local/Qt-6.6.2/include/QtWidgets/QListWidget \
+		/usr/local/Qt-6.6.2/include/QtWidgets/qlistwidget.h \
+		/usr/local/Qt-6.6.2/include/QtWidgets/qlistview.h \
+		/usr/local/Qt-6.6.2/include/QtWidgets/qabstractitemview.h \
+		/usr/local/Qt-6.6.2/include/QtWidgets/qabstractscrollarea.h \
+		/usr/local/Qt-6.6.2/include/QtCore/qitemselectionmodel.h \
+		/usr/local/Qt-6.6.2/include/QtWidgets/QPushButton \
+		/usr/local/Qt-6.6.2/include/QtWidgets/qpushbutton.h \
+		/usr/local/Qt-6.6.2/include/QtWidgets/QSpinBox
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o deposit.o ../s21_SmartCalc/deposit.cpp
 
 graph.o: ../s21_SmartCalc/graph.cpp ../s21_SmartCalc/graph.h \
@@ -3946,6 +4012,9 @@ graph.o: ../s21_SmartCalc/graph.cpp ../s21_SmartCalc/graph.h \
 credit_calc.o: ../s21_SmartCalc/model/credit_calc.c ../s21_SmartCalc/model/credit_calc.h
 	$(CC) -c $(CFLAGS) $(INCPATH) -o credit_calc.o ../s21_SmartCalc/model/credit_calc.c
 
+deposit_calc.o: ../s21_SmartCalc/model/deposit_calc.c ../s21_SmartCalc/model/deposit_calc.h
+	$(CC) -c $(CFLAGS) $(INCPATH) -o deposit_calc.o ../s21_SmartCalc/model/deposit_calc.c
+
 math_functions.o: ../s21_SmartCalc/model/math_functions.c ../s21_SmartCalc/model/math_functions.h
 	$(CC) -c $(CFLAGS) $(INCPATH) -o math_functions.o ../s21_SmartCalc/model/math_functions.c
 
@@ -4130,6 +4199,9 @@ main.o: ../s21_SmartCalc/main.cpp ../s21_SmartCalc/mainwindow.h \
 		../s21_SmartCalc/model/stack.h \
 		../s21_SmartCalc/credit.h \
 		/usr/local/Qt-6.6.2/include/QtWidgets/QWidget \
+		../s21_SmartCalc/model/credit_calc.h \
+		../s21_SmartCalc/deposit.h \
+		../s21_SmartCalc/model/deposit_calc.h \
 		/usr/local/Qt-6.6.2/include/QtWidgets/QApplication \
 		/usr/local/Qt-6.6.2/include/QtWidgets/qapplication.h \
 		/usr/local/Qt-6.6.2/include/QtCore/qcoreapplication.h \
@@ -4330,6 +4402,9 @@ mainwindow.o: ../s21_SmartCalc/mainwindow.cpp ../s21_SmartCalc/mainwindow.h \
 		../s21_SmartCalc/model/stack.h \
 		../s21_SmartCalc/credit.h \
 		/usr/local/Qt-6.6.2/include/QtWidgets/QWidget \
+		../s21_SmartCalc/model/credit_calc.h \
+		../s21_SmartCalc/deposit.h \
+		../s21_SmartCalc/model/deposit_calc.h \
 		ui_mainwindow.h \
 		/usr/local/Qt-6.6.2/include/QtCore/QVariant \
 		/usr/local/Qt-6.6.2/include/QtWidgets/QApplication \

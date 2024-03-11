@@ -14,6 +14,7 @@ SOURCES += \
     deposit.cpp \
     graph.cpp \
     model/credit_calc.c \
+    model/deposit_calc.c \
     model/math_functions.c \
     model/s21_smart_calc.c \
     model/stack.c \
@@ -26,6 +27,7 @@ HEADERS += \
     deposit.h \
     graph.h \
     model/credit_calc.h \
+    model/deposit_calc.h \
     model/math_functions.h \
     model/s21_smart_calc.h \
     model/stack.h \
