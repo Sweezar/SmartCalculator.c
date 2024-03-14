@@ -22,7 +22,7 @@ END_TEST
 
 START_TEST(test_ln_calc_3) {
   double res = 0;
-  double reference = log(9+78) / log(1/2.0) / (10.0 + 1038);
+  double reference = log(9 + 78) / log(1 / 2.0) / (10.0 + 1038);
   char *expression = "ln(9+78)/ln(1/2.0)/(10.0+1038)";
   evaluate_expression(expression, &res, 0);
 
@@ -40,9 +40,9 @@ START_TEST(test_ln_calc_4) {
 }
 END_TEST
 
-START_TEST(test_ln_calc_5) { 
+START_TEST(test_ln_calc_5) {
   double res = 0;
-  char *expression = "ln(((1/3.0)-(-7/-9.1))+10-1038)"; // NaN
+  char *expression = "ln(((1/3.0)-(-7/-9.1))+10-1038)";  // NaN
   evaluate_expression(expression, &res, 0);
 
   ck_assert_double_nan(res);

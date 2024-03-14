@@ -10,21 +10,18 @@ namespace Ui {
 class Graph;
 }
 
-class Graph : public QFrame
-{
-    Q_OBJECT
+class Graph : public QFrame {
+  Q_OBJECT
 
-public:
-    explicit Graph(QWidget *parent = nullptr);
-    ~Graph();
+ public:
+  explicit Graph(QWidget *parent = nullptr);
+  ~Graph();
 
-private:
-    Ui::Graph *ui;
+ private:
+  Ui::Graph *ui;
 
-public slots:
-    void drawing_graph(char* ex);
+ public slots:
+  void drawing_graph(char *ex);
 };
 
-
-
-#endif // GRAPH_H
+#endif  // GRAPH_H

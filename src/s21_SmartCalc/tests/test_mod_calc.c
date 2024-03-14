@@ -22,7 +22,7 @@ END_TEST
 
 START_TEST(test_mod_calc_3) {
   double res = 0;
-  double reference = (1+3)%(7+9)%(10+1038);
+  double reference = (1 + 3) % (7 + 9) % (10 + 1038);
   char *expression = "(1+3)mod(7+9)mod(10+1038)";
   evaluate_expression(expression, &res, 0);
 
@@ -32,7 +32,7 @@ END_TEST
 
 START_TEST(test_mod_calc_4) {
   double res = 0;
-  double reference = ((1%3)-(-7%-9))+10-1038;
+  double reference = ((1 % 3) - (-7 % -9)) + 10 - 1038;
   char *expression = "((1mod3)-(-7mod-9))+10-1038";
   evaluate_expression(expression, &res, 0);
 
@@ -46,8 +46,8 @@ Suite *test_mod_calc(void) {
 
   tcase_add_test(tc, test_mod_calc_1);
   tcase_add_test(tc, test_mod_calc_2);
-	tcase_add_test(tc, test_mod_calc_3);
-    tcase_add_test(tc, test_mod_calc_4);
+  tcase_add_test(tc, test_mod_calc_3);
+  tcase_add_test(tc, test_mod_calc_4);
 
   suite_add_tcase(s, tc);
   return s;

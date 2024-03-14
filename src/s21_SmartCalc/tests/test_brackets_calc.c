@@ -23,7 +23,7 @@ END_TEST
 START_TEST(test_brackets_calc_3) {
   double res = 0;
   int return_code;
-  char *expression = "(1+(2-3*(5-3)+4)))"; // лишняя скобка
+  char *expression = "(1+(2-3*(5-3)+4)))";  // лишняя скобка
   return_code = evaluate_expression(expression, &res, 0);
 
   ck_assert_int_eq(return_code, 1);

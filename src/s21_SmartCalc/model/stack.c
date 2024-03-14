@@ -7,20 +7,16 @@ void stack_create(Stack *s) {
 
 size_t stack_size(const Stack *s) { return s->size; }
 
-int stack_top_is_num(const Stack *s) { return (s->top->math_operator== 0); }
-
-numLexem stack_top_num(const Stack *s) { return s->top->value; }
-
-int stack_top_is_operator(const Stack *s) { return (s->top->math_operator!= 0); }
-
-operationLexem stack_top_operator(const Stack *s) { return s->top->math_operator; }
+operationLexem stack_top_operator(const Stack *s) {
+  return s->top->math_operator;
+}
 
 void stack_push(Stack *s, numLexem value, operationLexem math_operator,
                 int priority) {
   Node *ptr = (Node *)malloc(sizeof(Node));
   if (ptr != NULL) {
     ptr->value = value;
-    ptr->math_operator= math_operator;
+    ptr->math_operator = math_operator;
     ptr->priority = priority;
     ptr->next = s->top;
     s->top = ptr;
@@ -68,17 +64,3 @@ void stack_clear(Stack *s) {
   s->top = NULL;
   s->size = 0;
 }
-
-// void print_list(Node *top) {
-//   Node *ptr = top;
-//   while (ptr != NULL) {
-//     if (ptr->math_operator) {
-//       printf("%d - operator, \t", ptr->math_operator);
-//     } else {
-//       printf("%lf - number, \t", ptr->value);
-//     }
-//     ptr = ptr->next;
-//   }
-// }
-
-// void stack_print(const Stack *s) { print_list(s->top); }

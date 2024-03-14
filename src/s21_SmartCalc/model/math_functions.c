@@ -29,7 +29,9 @@ int is_atan(const char* string) {
 
 int is_ln(const char* string) { return string[0] == 'l' && string[1] == 'n'; }
 
-int is_log(const char* string) { return string[0] == 'l' && string[1] == 'o' && string[2] == 'g'; }
+int is_log(const char* string) {
+  return string[0] == 'l' && string[1] == 'o' && string[2] == 'g';
+}
 
 int is_sqrt(const char* string) {
   return string[0] == 's' && string[1] == 'q' && string[2] == 'r' &&

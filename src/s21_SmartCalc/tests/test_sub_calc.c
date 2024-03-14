@@ -42,7 +42,7 @@ END_TEST
 
 START_TEST(test_sub_calc_5) {
   double res = 0;
-  double reference = 10 + - (1 + 2);
+  double reference = 10 + -(1 + 2);
   char *expression = "10+-(1+2)";
   evaluate_expression(expression, &res, 0);
 

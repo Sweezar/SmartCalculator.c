@@ -22,7 +22,7 @@ END_TEST
 
 START_TEST(test_tan_calc_3) {
   double res = 0;
-  double reference = 10 - tan(48.5+35);
+  double reference = 10 - tan(48.5 + 35);
   char *expression = "10-tan(48.5+35)";
   evaluate_expression(expression, &res, 0);
 
@@ -32,7 +32,7 @@ END_TEST
 
 START_TEST(test_tan_calc_4) {
   double res = 0;
-  double reference = 10 - tan(48.5*35)/2;
+  double reference = 10 - tan(48.5 * 35) / 2;
   char *expression = "10-tan(48.5*35)/2";
   evaluate_expression(expression, &res, 0);
 

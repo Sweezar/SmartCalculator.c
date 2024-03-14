@@ -3,9 +3,13 @@
 int main(void) {
   int failed = 0;
 
-  Suite *smart_calc_test[] = {test_brackets_calc(), test_sum_calc(),
-                              test_sub_calc(), test_mult_calc(),
-                              test_div_calc(), test_pow_calc(), test_mod_calc(),
+  Suite *smart_calc_test[] = {test_brackets_calc(),
+                              test_sum_calc(),
+                              test_sub_calc(),
+                              test_mult_calc(),
+                              test_div_calc(),
+                              test_pow_calc(),
+                              test_mod_calc(),
                               test_cos_calc(),
                               test_sin_calc(),
                               test_tan_calc(),
@@ -15,6 +19,8 @@ int main(void) {
                               test_sqrt_calc(),
                               test_ln_calc(),
                               test_log_calc(),
+                              test_deposit_calc(),
+                              test_credit_calc(),
                               NULL};
 
   for (int i = 0; smart_calc_test[i] != NULL; i++) {

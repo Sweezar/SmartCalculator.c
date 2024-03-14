@@ -4,6 +4,8 @@
 #include <check.h>
 #include <stdio.h>
 
+#include "../model/credit_calc.h"
+#include "../model/deposit_calc.h"
 #include "../model/s21_smart_calc.h"
 
 #define ACCURACY 1e-07
@@ -25,5 +27,8 @@ Suite *test_atan_calc(void);
 Suite *test_sqrt_calc(void);
 Suite *test_ln_calc(void);
 Suite *test_log_calc(void);
+
+Suite *test_credit_calc(void);
+Suite *test_deposit_calc(void);
 
 #endif

@@ -44,9 +44,6 @@ typedef struct {
 
 void stack_create(Stack *s);
 size_t stack_size(const Stack *s);
-int stack_top_is_num(const Stack *s);
-numLexem stack_top_num(const Stack *s);
-int stack_top_is_operator(const Stack *s);
 operationLexem stack_top_operator(const Stack *s);
 void stack_push(Stack *s, numLexem value, operationLexem math_operator,
                 int priority);
@@ -55,7 +52,5 @@ operationLexem stack_pop_operator(Stack *s);
 int stack_is_empty(const Stack *s);
 void delete_list(Node *top);
 void stack_clear(Stack *s);
-// void print_list(Node *top);
-// void stack_print(const Stack *s);
 
 #endif
