@@ -7,8 +7,8 @@ START_TEST(test_deposit_calc_1) {
   double interest_rate = 8.0;
   int interest_capitalization = 0;
   int capitalisation_period = 0;
-  Replenishments_s replenishments[20];
-  Withdrawals_s withdrawals[20];
+  Replenishments_s replenishments[20] = {0};
+  Withdrawals_s withdrawals[20] = {0};
 
   res = deposit_calc(&deposit_amount, posting_period, interest_rate,
                      interest_capitalization, capitalisation_period,
@@ -25,8 +25,8 @@ START_TEST(test_deposit_calc_2) {
   double interest_rate = 8.0;
   int interest_capitalization = 1;
   int capitalisation_period = 1;
-  Replenishments_s replenishments[20];
-  Withdrawals_s withdrawals[20];
+  Replenishments_s replenishments[20] = {0};
+  Withdrawals_s withdrawals[20] = {0};
 
   res = deposit_calc(&deposit_amount, posting_period, interest_rate,
                      interest_capitalization, capitalisation_period,
@@ -43,12 +43,12 @@ START_TEST(test_deposit_calc_3) {
   double interest_rate = 8.0;
   int interest_capitalization = 1;
   int capitalisation_period = 2;
-  Replenishments_s replenishments[20];
+  Replenishments_s replenishments[20] = {0};
   replenishments[0].sum = 1000;
   replenishments[0].period = 1;
   replenishments[1].sum = 1000;
   replenishments[1].period = 3;
-  Withdrawals_s withdrawals[20];
+  Withdrawals_s withdrawals[20] = {0};
 
   res = deposit_calc(&deposit_amount, posting_period, interest_rate,
                      interest_capitalization, capitalisation_period,
@@ -65,8 +65,8 @@ START_TEST(test_deposit_calc_4) {
   double interest_rate = 8.0;
   int interest_capitalization = 1;
   int capitalisation_period = 2;
-  Replenishments_s replenishments[20];
-  Withdrawals_s withdrawals[20];
+  Replenishments_s replenishments[20] = {0};
+  Withdrawals_s withdrawals[20] = {0};
   withdrawals[0].sum = 1000;
   withdrawals[0].period = 2;
   withdrawals[1].month = 3;
